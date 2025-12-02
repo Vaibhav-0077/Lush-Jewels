@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <%- include('../partials/header', { session }); %>
+
+  <section class="max-w-4xl mx-auto p-8 bg-white shadow-md rounded-lg mt-10 mb-10">
+    <h1 class="text-3xl font-bold mb-4">Privacy Policy</h1>
+    <p class="text-gray-600 mb-6">Last Updated: <%= new Date().toLocaleDateString() %></p>
+
+    <p class="mb-4">Lush Jewels ("we", "our", "us") is committed to protecting your privacy...</p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">1. Information We Collect</h2>
+    <ul class="list-disc ml-6 text-gray-700">
+      <li>Name, Email, Phone, Address</li>
+      <li>Order details</li>
+      <li>Payment information (processed securely via Razorpay)</li>
+    </ul>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">2. How We Use Your Information</h2>
+    <p>We use your data to process orders, provide support, and improve customer experience.</p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">3. Sharing of Information</h2>
+    <p>We do not sell user data. Data is shared only with Razorpay and courier partners.</p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">Contact Us</h2>
+    <p>Email: info@lushjewels.com</p>
+  </section>
+
+  <%- include('../partials/footer'); %>
+</body>
+</html>

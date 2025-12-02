@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin | Orders</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <header class="bg-purple-700 text-white py-5 px-6 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">🧾 All Orders</h1>
+    <a href="/admin/dashboard" class="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500">
+      ⬅ Back to Dashboard
+    </a>
+
+  </header>
+
+<main class="p-6 overflow-x-auto">
+  <% if (orders.length === 0) { %>
+    <p class="text-center text-gray-500 mt-20">No orders have been placed yet 😔</p>
+  <% } else { %>
+    <table class="w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <thead class="bg-purple-700 text-white">
+        <tr>
+          <th class="py-3 px-4 text-left">Customer</th>
+          <th class="py-3 px-4 text-left">Email</th>
+          <th class="py-3 px-4 text-left">Phone</th>
+          <th class="py-3 px-4 text-left">Products</th>
+          <th class="py-3 px-4 text-left">Payment</th> <!-- ✅ Payment Column -->
+          <th class="py-3 px-4 text-left">Total</th>
+          <th class="py-3 px-4 text-left">Address</th>
+          <th class="py-3 px-4 text-left">Date</th>
+          <th class="py-3 px-4 text-center">Action</th> <!-- ✅ New column for Delete -->
+        </tr>
+      </thead>
+      <tbody>
+        <% orders.forEach(order => { %>
+          <tr class="border-b hover:bg-gray-100 transition">
+            <td class="py-2 px-4"><%= order.userName %></td>
+            <td class="py-2 px-4"><%= order.email %></td>
+            <td class="py-2 px-4"><%= order.phone %></td>
+
+            <td class="py-2 px-4">
+              <% order.items.forEach(item => { %>
+                <div><%= item.name %> (₹<%= item.price %> × <%= item.qty %>)</div>
+              <% }) %>
+            </td>
+
+            <!-- ✅ Payment Method -->
+            <td class="py-2 px-4 text-purple-700 font-semibold">
+              <%= order.paymentMethod %>
+            </td>
+
+            <!-- ✅ Total -->
+            <td class="py-2 px-4 font-bold text-green-700">₹<%= order.total %></td>
+
+            <!-- ✅ Address -->
+            <td class="py-2 px-4 text-sm text-gray-700">
+              <%= order.address %>, <%= order.city %>, <%= order.state %> - <%= order.pin %>
+            </td>
+
+            <!-- ✅ Date -->
+            <td class="py-2 px-4 text-gray-500">
+              <%= new Date(order.date).toLocaleString() %>
+            </td>
+
+            <!-- ✅ Delete Button -->
+            <td class="py-2 px-4 text-center">
+              <form action="/admin/orders/delete/<%= order._id %>" method="POST" class="inline delete-form">
+                <button
+                  type="submit"
+                  class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md shadow transition">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+
+  <!-- ✅ Toast Container -->
+  <div id="toast" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+  bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg text-lg z-50"></div>
+</main>
+
+<!-- ✅ Toast + Smooth Delete JS -->
+<script>
+  document.querySelectorAll('.delete-form').forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      showConfirmToast(form); // ✅ custom confirmation toast
+    });
+  });
+
+  // ✅ Confirm delete toast
+  function showConfirmToast(form) {
+    // Remove any existing toast
+    const existing = document.getElementById("toast");
+    if (existing) existing.remove();
+
+    // Create toast
+    const toast = document.createElement("div");
+    toast.id = "toast";
+    toast.className =
+      "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-gray-800 border shadow-lg rounded-xl px-6 py-4 z-50 text-center space-y-3";
+    toast.innerHTML = `
+      <div class="text-lg font-semibold">⚠ Confirm delete?</div>
+      <div class="flex justify-center gap-4">
+        <button id="yesDel" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">Yes</button>
+        <button id="noDel" class="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500">No</button>
+      </div>
+    `;
+    document.body.appendChild(toast);
+
+    // Handle buttons
+    document.getElementById("yesDel").addEventListener("click", async () => {
+      await deleteOrder(form);
+      toast.remove();
+    });
+    document.getElementById("noDel").addEventListener("click", () => {
+      toast.remove();
+      showToast("❌ Cancelled", "error");
+    });
+  }
+
+  // ✅ Delete order (AJAX)
+  async function deleteOrder(form) {
+    try {
+      const res = await fetch(form.action, { method: "POST" });
+      const data = await res.json();
+      if (data.success) {
+        form.closest("tr").remove();
+        showToast("✅ Order deleted successfully!");
+      } else {
+        showToast("❌ Failed to delete order.", "error");
+      }
+    } catch (err) {
+      showToast("⚠ Server error, try again.", "error");
+    }
+  }
+
+  // ✅ Toast helper for success/error messages
+  function showToast(msg, type = "success") {
+    let toast = document.getElementById("toast");
+    if (toast) toast.remove();
+
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.textContent = msg;
+    toast.className = `fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+      px-6 py-3 rounded-xl shadow-lg text-white text-lg z-50 ${
+        type === "error" ? "bg-red-600" : "bg-green-600"
+      }`;
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 2500);
+  }
+</script>
+
+
+
+</body>
+</html>

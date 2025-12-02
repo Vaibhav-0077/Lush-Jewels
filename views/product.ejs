@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= name %> - VAIBHAV Jewels
+  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      color: #333;
+    }
+
+    .thumb-active {
+      border: 2px solid #6b21a8;
+    }
+    #toast {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    #toast.opacity-100 {
+      opacity: 1;
+    }
+/* ================================================================================================================ */
+
+   /* Thumbnail hover */
+  .thumb {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  .thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Larger zoom lens */
+  .zoom-lens {
+    position: absolute;
+    border: 3px solid #7e22ce;
+    border-radius: 50%;
+    width: 280px;         /* 🔹 Bigger circle */
+    height: 340px;
+    overflow: hidden;
+    pointer-events: none;
+    display: none;
+    z-index: 50;
+    background-repeat: no-repeat;
+    background-size: 500%; /* 🔹 Stronger zoom */
+    box-shadow: 0 0 12px rgba(126, 34, 206, 0.3);
+    transition: opacity 0.1s ease;
+  }
+
+
+/* ================================================================================================================ */
+  </style>
+</head>
+
+<body class="bg-gray-50">
+
+  <!-- 🔹 Header -->
+  <!-- 🔹 Header -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold text-gray-800">VAIBHAV Jewels</div>
+
+      <!-- 🖥️ Desktop Navigation -->
+      <nav class="hidden md:flex space-x-6 items-center">
+        <a href="/" class="text-gray-600 hover:text-gray-900">Home</a>
+        <a href="/category/necklaces" class="text-gray-600 hover:text-gray-900">Necklaces</a>
+        <a href="/category/rings" class="text-gray-600 hover:text-gray-900">Rings</a>
+        <a href="/category/earrings" class="text-gray-600 hover:text-gray-900">Earrings</a>
+        <a href="/category/bracelets" class="text-gray-600 hover:text-gray-900">Bracelets</a>
+
+        <!-- 🛒 Desktop Cart Button -->
+        <button id="cart-btn" class="relative bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">
+          🛒 Cart
+          <span id="cart-count"
+            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span>
+        </button>
+      </nav>
+
+      <!-- 📱 Mobile Hamburger (visible only on mobile) -->
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-gray-700 focus:outline-none" aria-label="Toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 📱 Mobile Dropdown Menu -->
+    <nav id="mobile-menu" class="md:hidden hidden px-6 pb-4 space-y-2 bg-white shadow-md">
+      <!-- Mobile Search -->
+      <!-- <div class="flex py-2">
+      <input type="text" id="mobile-search-input" placeholder="Search jewelry..."
+        class="flex-grow px-3 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-gray-800" />
+      <button id="mobile-search-btn"
+        class="bg-gray-800 text-white px-4 py-2 rounded-r-full hover:bg-gray-700 transition">
+        Search
+      </button>
+    </div> -->
+
+      <a href="/" class="block text-gray-600">Home</a>
+      <a href="/login" class="block text-gray-600">Login</a>
+      <a href="/category" class="block text-gray-600">Products</a>
+      <a href="/contact" class="block text-gray-600">Contact</a>
+
+      <!-- 🛒 Mobile Cart Button (inside dropdown) -->
+      <button id="mobile-cart-btn"
+        class="relative bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 w-full text-left">
+        🛒 Cart
+        <span id="mobile-cart-count"
+          class="absolute top-1/2 -translate-y-1/2 right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span>
+      </button>
+    </nav>
+  </header>
+
+
+  <!-- 🔸 Product Section -->
+  <main class="container mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+    <!-- Left: Images -->
+    <div>
+      <!-- <div class="bg-white rounded-lg shadow-md p-4 flex justify-center mb-6">
+        <img id="main-img" src="<%= img %>" alt="<%= name %>" class="rounded-lg object-contain w-full max-w-md h-96">
+      </div> -->
+
+      
+      <div class="bg-white rounded-lg shadow-md p-4 flex justify-center mb-6">
+        <div class="main-img-wrap">
+          <img id="main-img" src="<%= img %>" alt="<%= name %>" class="rounded-lg object-contain w-full max-w-md h-96">
+          <div id="img-loupe" class="img-loupe" aria-hidden="true"></div>
+        </div>
+      </div>
+
+
+
+      
+      <div id="thumbs" class="flex justify-center gap-3 flex-wrap">
+        <% if (thumbnails && thumbnails.length > 0) { %>
+          <% thumbnails.forEach((thumb, i) => { %>
+            <img 
+              src="<%= thumb %>"
+              class="thumb w-20 h-20 rounded-lg object-cover cursor-pointer 
+                    <%= i === 0 ? 'thumb-active border-2 border-purple-600' : '' %>"
+              alt="thumbnail"
+            >
+          <% }) %>
+        <% } else { %>
+          <!-- fallback if product has no thumbnails -->
+          <% for (let i = 0; i < 4; i++) { %>
+            <img src="<%= img %>" class="thumb w-20 h-20 rounded-lg object-cover cursor-pointer <%= i === 0 ? 'thumb-active border-2 border-purple-600' : '' %>">
+          <% } %>
+        <% } %>
+      </div>
+
+    </div>
+
+    <!-- Right: Info -->
+    <div class="bg-white rounded-lg shadow-md p-6 space-y-4">
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900">
+        <%= name %>
+      </h1>
+      <p class="text-sm text-gray-500">Code: PR99193</p>
+
+      <div class="flex items-center gap-2 text-yellow-500">
+        <span>⭐</span><span>4.5 | 50 Reviews</span>
+      </div>
+
+      <div class="text-2xl font-bold text-gray-900">
+        <%= price %>
+          <span class="line-through text-gray-400 text-lg ml-2">₹302</span>
+          <span class="text-green-600 text-base ml-2">You Save 34% (₹103)</span>
+      </div>
+
+      <div class="flex items-center gap-3 pt-2">
+        <span class="font-semibold">QTY</span>
+        <div class="flex items-center border rounded">
+          <button id="minus" class="px-3 py-1">−</button>
+          <input id="quantity" type="number" value="1" min="1" class="w-12 text-center border-x">
+          <button id="plus" class="px-3 py-1">+</button>
+        </div>
+      </div>
+
+      <div class="flex gap-4 pt-4">
+        <button id="add-to-cart"
+          class="flex-1 border-2 border-purple-600 text-purple-700 font-semibold px-6 py-3 rounded hover:bg-purple-50">
+          ADD TO CART
+        </button>
+
+        <% if (session && session.user) { %>
+          <button
+            id="buy-now"
+            class="flex-1 text-center bg-purple-600 text-white font-semibold px-6 py-3 rounded hover:bg-purple-700">
+            BUY IT NOW
+          </button>
+        <% } else { %>
+          <a href="/user/login?message=Please login to buy products"
+            class="flex-1 text-center bg-gray-400 text-white font-semibold px-6 py-3 rounded cursor-not-allowed">
+            LOGIN TO BUY
+          </a>
+        <% } %>
+      </div>
+
+
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6">
+        <div class="border rounded-lg p-3 text-center text-sm">
+          🚚 <p>Free Shipping<br><span class="text-gray-500">Above ₹499</span></p>
+        </div>
+        <div class="border rounded-lg p-3 text-center text-sm">
+          🔁 <p>Easy Return</p>
+        </div>
+        <div class="border rounded-lg p-3 text-center text-sm">
+          💵 <p>Cash on Delivery</p>
+        </div>
+        <div class="border rounded-lg p-3 text-center text-sm">
+          🛡️ <p>6 Months Warranty</p>
+        </div>
+      </div>
+
+      <p class="text-gray-600 text-sm pt-6">
+        This elegant jewellery piece complements any outfit with its unique craftsmanship and brilliance.
+      </p>
+    </div>
+  </main>
+
+  <!-- 🔹 Back Button -->
+  <!-- <div class="text-center pb-10">
+    <button onclick="window.location.href='/'" class="bg-gray-900 text-white px-6 py-2 rounded hover:bg-gray-800">
+      ← Back to Products
+    </button>
+  </div> -->
+
+  <!-- 🩵 About This Product -->
+    <section class="mt-10 bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">About this Product</h2>
+      <p class="text-gray-700 leading-relaxed">
+        <%= description || "This elegant piece is crafted with precision and designed to bring out your natural beauty on every occasion." %>
+      </p>
+    </section>
+
+    <!-- 🩶 Product Details Table -->
+    <section class="mt-8 bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Details</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
+          <tbody>
+            <tr class="border-b"><td class="font-medium p-2 w-1/3">Product Name</td><td class="p-2"><%= name %></td></tr>
+            <tr class="border-b"><td class="font-medium p-2">Design</td><td class="p-2"><%= design || 'Classic Design' %></td></tr>
+            <tr class="border-b"><td class="font-medium p-2">Occasion</td><td class="p-2"><%= occasion || 'Wedding, Party, Festive' %></td></tr>
+            <tr class="border-b"><td class="font-medium p-2">Material</td><td class="p-2"><%= material || 'Gold Plated Alloy' %></td></tr>
+            <tr class="border-b"><td class="font-medium p-2">Description</td><td class="p-2"><%= description || 'A timeless jewellery piece for every event.' %></td></tr>
+            <tr><td class="font-medium p-2">Item Description</td><td class="p-2"><%= itemDescription || 'Elegant and beautifully crafted piece of jewellery.' %></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <!-- Footer -->
+  <footer id="contact" class="bg-gray-900 text-gray-300 pt-12 pb-6">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+    <!-- 🛍️ Brand + About -->
+    <div>
+      <h1 class="text-2xl md:text-3xl font-extrabold text-white mb-4 tracking-wide">Lush Jewels</h1>
+      <p class="text-sm leading-relaxed">
+        No Rust – Just Lush Lust<br>
+        No Tarnish – Just Lush Lavish<br>
+        THE ANTI TARNISH JEWELLERY
+
+      </p>
+    </div>
+
+    <!-- 💎 Shop Links -->
+    <div>
+      <h4 class="text-lg font-semibold text-white mb-3">Shop</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/category/necklaces" class="hover:text-yellow-400 transition">Necklaces</a></li>
+        <li><a href="/category/earrings" class="hover:text-yellow-400 transition">Earrings</a></li>
+        <li><a href="/category/rings" class="hover:text-yellow-400 transition">Rings</a></li>
+        <li><a href="/category/bracelets" class="hover:text-yellow-400 transition">Bracelets</a></li>
+      </ul>
+    </div>
+
+    <!-- 📞 Customer Support -->
+    <div>
+      <h4 class="text-lg font-semibold text-white mb-3">Customer Service</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/help-center" class="hover:text-yellow-400 transition">Help Center</a></li>
+        <li><a href="/shipping-policy" class="hover:text-yellow-400 transition">Shipping & Returns</a></li>
+        <li><a href="/privacy-policy" class="hover:text-yellow-400 transition">Privacy Policy</a></li>
+        <li><a href="/terms" class="hover:text-yellow-400 transition">Terms & Conditions</a></li>
+        <li><a href="/refund-policy" class="hover:text-yellow-400 transition">Refund Policy</a></li>
+      </ul>
+    </div>
+
+
+    <!-- 📱 Contact Info -->
+    <div>
+      <h4 class="text-lg font-semibold text-white mb-3">Contact Us</h4>
+      <p class="text-sm">📧 info@vaibhavjewels.com</p>
+      <p class="text-sm mb-4">📞 +91 98765 43210</p>
+      <div class="flex space-x-4 mt-2">
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Divider -->
+  <div class="border-t border-gray-700 mt-10 pt-4 text-center text-sm text-gray-500">
+    © 2025 <span class="font-semibold text-yellow-400">VAIBHAV Jewels</span>. All rights reserved.
+  </div>
+</footer>
+
+<!-- Font Awesome for Social Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- ✅ Include Global Cart Sidebar -->
+  <%- include('partials/cart') %>
+
+    <!-- ✅ Toast Notification -->
+    <div id="toast"
+      class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+            bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg z-[9999]
+            text-base transition-all duration-500">
+    </div>
+
+
+
+    <!-- ✅ Load Global Cart Script -->
+    <script src="/js/cart.js"></script>
+
+    <!-- ✅ Mobile Menu Toggle -->
+    <script>
+      // ===================================================================================================================
+  // Thumbnails: click to change main image (already likely present)
+  
+  document.querySelectorAll(".thumb").forEach(t => {
+    t.addEventListener("click", () => {
+      const m = document.getElementById("main-img");
+      m.src = t.src;
+      // update loupe background when main image changes
+      const loupe = document.getElementById("img-loupe");
+      if (loupe) loupe.style.backgroundImage = `url("${m.src}")`;
+    });
+  });
+
+  // Setup loupe (magnifier)
+  (function() {
+    const mainImg = document.getElementById("main-img");
+    const loupe = document.getElementById("img-loupe");
+    if (!mainImg || !loupe) return;
+
+    // Initialize loupe background
+    loupe.style.backgroundImage = `url("${mainImg.src}")`;
+
+    // Update loupe image when main image changes
+    document.querySelectorAll(".thumb").forEach(t => {
+      t.addEventListener("mouseenter", () => {
+        mainImg.src = t.src;
+        loupe.style.backgroundImage = `url("${t.src}")`;
+      });
+    });
+
+    mainImg.addEventListener("mouseenter", () => {
+      loupe.style.display = "block";
+    });
+
+    mainImg.addEventListener("mousemove", (e) => {
+      const rect = mainImg.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // position the loupe closer to the cursor (+)
+      loupe.style.left = `${e.clientX - 10}px`;
+      loupe.style.top = `${e.clientY - 10}px`;
+
+      // Move the zoomed background based on cursor position
+      const px = (x / rect.width) * 100;
+      const py = (y / rect.height) * 100;
+      loupe.style.backgroundPosition = `${px}% ${py}%`;
+      loupe.style.backgroundImage = `url("${mainImg.src}")`;
+    });
+
+    mainImg.addEventListener("mouseleave", () => {
+      loupe.style.display = "none";
+    });
+  })();
+
+  // ===========================================================================================
+  const mainImg = document.getElementById("main-img");
+  const lens = document.createElement("div");
+  lens.className = "zoom-lens";
+  mainImg.parentElement.appendChild(lens);
+
+  mainImg.addEventListener("mousemove", moveLens);
+  mainImg.addEventListener("mouseenter", () => {
+    lens.style.display = "block";
+    lens.style.backgroundImage = `url('${mainImg.src}')`;
+  });
+  mainImg.addEventListener("mouseleave", () => {
+    lens.style.display = "none";
+  });
+
+  function moveLens(e) {
+    const rect = mainImg.getBoundingClientRect();
+    const lensSize = 180;
+    const offset = 2; // 🔹 Keeps lens very close to cursor
+    let x = e.clientX - rect.left - lensSize / 2;
+    let y = e.clientY - rect.top - lensSize / 2;
+
+    // Keep lens within image boundaries
+    x = Math.max(0, Math.min(x, rect.width - lensSize));
+    y = Math.max(0, Math.min(y, rect.height - lensSize));
+
+    lens.style.left = `${x + offset}px`;
+    lens.style.top = `${y + offset}px`;
+
+    const zoomX = ((e.clientX - rect.left) / rect.width) * 100;
+    const zoomY = ((e.clientY - rect.top) / rect.height) * 100;
+    lens.style.backgroundPosition = `${zoomX}% ${zoomY}%`;
+  }
+
+
+
+
+
+      
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+        });
+      }
+
+
+    <!-- ✅ Product Page Script -->
+      const name = "<%= name %>";
+      const price = "<%= price %>";
+      const img = "<%= img %>";
+
+      const qtyInput = document.getElementById("quantity");
+      document.getElementById("minus").onclick = () => {
+        if (qtyInput.value > 1) qtyInput.value--;
+      };
+      document.getElementById("plus").onclick = () => {
+        qtyInput.value++;
+      };
+
+      // Thumbnail click
+      document.querySelectorAll(".thumb").forEach(t => {
+        t.addEventListener("click", () => {
+          const mainImg = document.getElementById("main-img");
+          mainImg.src = t.src;
+
+          // Highlight active
+          document.querySelectorAll(".thumb").forEach(img => 
+            img.classList.remove("thumb-active", "border-purple-600", "border-2")
+          );
+          t.classList.add("thumb-active", "border-purple-600", "border-2");
+        });
+      });
+
+
+      // ✅ Add product to cart using global cart logic
+      document.getElementById("add-to-cart").addEventListener("click", () => {
+        const qty = parseInt(qtyInput.value) || 1;
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existing = cart.find(item => item.name === name);
+
+        if (existing) {
+          showToast("🛍️ Product already in cart!");
+        } else {
+          cart.push({ name, price, img, qty });
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCartCount();
+          showToast("✅ Added to cart!");
+        }
+      });
+
+
+
+      // ✅ Buy Now → checkout directly
+      // const buyNowBtn = document.getElementById("buy-now");
+      // if (buyNowBtn) {
+      //   buyNowBtn.addEventListener("click", () => {
+      //     const qty = parseInt(qtyInput.value) || 1;
+      //     // localStorage.setItem("cart", JSON.stringify([{ name, price, img, qty }]));
+      //     window.location.href = "/checkout";
+      //   });
+      // }
+
+      // ✅ Toast Function (centered)
+//     function showToast(message) {
+//       const toast = document.getElementById("toast");
+//       if (!toast) return;
+
+//       toast.textContent = message;
+//       toast.classList.remove("hidden", "opacity-0");
+//       toast.classList.add("opacity-100");
+
+//       // Hide after 2 seconds
+//       setTimeout(() => {
+//         toast.classList.remove("opacity-100");
+//         toast.classList.add("opacity-0");
+//         setTimeout(() => toast.classList.add("hidden"), 2000);
+//       }, 2000);
+// }
+
+// =================================================================================================================
+        // ✅ BUY NOW — No LocalStorage, Direct Checkout of that product
+// ================== BUY NOW (Single Product Checkout) ==================
+// ✅ BUY NOW — No LocalStorage, Direct Checkout of that product
+document.getElementById("buy-now").addEventListener("click", () => {
+  const qty = parseInt(document.getElementById("quantity").value) || 1;
+  const name = "<%= name %>";
+  const price = "<%= price %>";
+  const img = "<%= img %>";
+
+  const params = new URLSearchParams({
+    name: name,
+    price: price,
+    img: img,
+    qty: qty,
+    single: 'true' // important flag
+  });
+
+  window.location.href = `/checkout?${params.toString()}`;
+});
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

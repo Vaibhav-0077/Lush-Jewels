@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lush Jewels - Timeless Luxury</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex items-center">
+        <!-- Left: Site Title -->
+        <div class="text-2xl font-bold text-gray-800 flex-shrink-0">Lush Jewels</div>
+
+        <!-- Center: Search Box (hidden on small screens) -->
+        <div class="flex-grow flex justify-center hidden lg:flex mx-6">
+          <input type="text" id="header-search-input" placeholder="Search jewelry..."
+            class="w-full max-w-md px-3 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-gray-800"
+            aria-label="Search jewelry" />
+          <button id="header-search-btn"
+            class="bg-gray-800 text-white px-4 py-2 rounded-r-full hover:bg-gray-700 transition whitespace-nowrap"
+            aria-label="Search">
+            Search
+          </button>
+        </div>
+
+        <!-- Right: Navigation Menu -->
+        <!-- Right: Navigation Menu -->
+        <nav class="hidden lg:flex space-x-6 flex-shrink-0">
+          <a href="#home" class="text-gray-600 hover:text-gray-900">Home</a>
+
+          <% if (session && session.user) { %>
+            <a href="/user/account" class="text-gray-600 hover:text-gray-900 ml-4">My Account</a>
+          <% } else { %>
+            <a href="/user/login" class="text-gray-600 hover:text-gray-900 ml-4">Login</a>
+          <% } %>
+
+          <a href="#products" class="text-gray-600 hover:text-gray-900 ml-4">Products</a>
+          <a href="#contact" class="text-gray-600 hover:text-gray-900 ml-4">Contact</a>
+
+
+
+          <!-- Cart Button -->
+          <button id="cart-btn" class="relative bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">
+            🛒 Cart
+            <span id="cart-count"
+              class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span>
+          </button>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <div class="lg:hidden ml-auto">
+          <button id="menu-btn" class="text-gray-600 focus:outline-none" aria-label="Toggle menu">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <nav id="mobile-menu" class="lg:hidden hidden px-6 pb-4 space-y-2 bg-white shadow-md">
+        <!-- Mobile Search Box -->
+        <div class="flex py-2">
+          <input type="text" id="mobile-search-input" placeholder="Search jewelry..."
+            aria-label="Search jewelry" />
+          <button id="mobile-search-btn"
+            class="bg-gray-800 text-white px-4 py-2 rounded-r-full hover:bg-gray-700 transition" aria-label="Search">
+            Search
+          </button>
+        </div>
+        <a href="#home" class="block text-gray-600 py-2">Home</a>
+
+        <% if (session && session.user) { %>
+          <a href="/user/account" class="block text-gray-600 hover:text-gray-900 py-2">My Account</a>
+        <% } else { %>
+          <a href="/user/login" class="block text-gray-600 hover:text-gray-900 py-2">Login</a>
+        <% } %>
+
+        <a href="#products" class="block text-gray-600 py-2">Products</a>
+        <a href="#contact" class="block text-gray-600 py-2">Contact</a>
+            <!-- Cart Button for Mobile -->
+            <button id="mobile-cart-btn"
+            class="relative bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 w-full text-left">
+              🛒 Cart
+              <span id="mobile-cart-count"
+                class="absolute top-1/2 -translate-y-1/2 right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span>
+            </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-bg text-white py-20 px-6">
+    <div class="container mx-auto text-center">
+      <h1 class="text-5xl font-bold mb-4 animate-fade-in">Discover Timeless Elegance</h1>
+      <p class="text-1xl mb-8">
+
+        JEWELLERY THAT FEELS AS NATURAL AS YOUR EVERYDAY GLOW
+        JEWELLERY CRAFTED TO SHINE WITH YOU EVERY DAY<br>
+        WEAR THE GLOW OF LUSH
+        BECAUSE LIFE DESERVES LUSH
+        WEAR THE GLOW OF LUSH
+
+      </p>
+      <a href="#products"
+        class="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+        Explore Our Collection
+      </a>
+      <div class="mt-10">
+        <img
+          src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5e066ef2-87c5-4e24-8d91-1764b1c6b74f.png"
+          alt="Vintage style jewelry display showcasing sparkling diamonds, emeralds, and gold pieces arranged elegantly on a luxurious velvet backdrop with soft candlelight illumination highlighting intricate engravings and gem facets"
+          class="w-full h-auto object-cover rounded-lg" onerror="this.style.display='none'" />
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- About Section -->
+  <section id="about" class="py-16 px-6 bg-white">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-4">Our Story</h2>
+      <p class="text-lg mb-8 max-w-2xl mx-auto">
+        <!-- At AW Jewels ,-->
+        At Lush Jewellery, we believe luxury should be a part of every day & not just special occasions. Our mission is
+        simple, to bring you jewellery that is beautiful, durable, and affordable without ever compromising on quality.
+        Each piece is crafted with care, designed to be anti-tarnish and long-lasting, so you can shine with confidence
+        wherever life takes you.
+        We believe in keeping our customers at the heart of everything we do.
+
+      </p>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="py-16 px-6 bg-gray-100">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-8">Featured Collections</h2>
+
+      <!-- Categories -->
+      <!-- <div class="flex flex-wrap justify-center space-x-4 mb-8">
+        <button class="category-btn bg-gray-800 text-white px-4 py-2 rounded-full">All</button>
+        <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border"><a
+            href="necklaces.html">Necklaces</a></button>
+        <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border"><a
+            href="rings.html">Rings</a></button>
+        <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border"><a
+            href="earrings.html">Earrings</a></button>
+        <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border"><a
+            href="bracelets.html">Bracelets</a></button>
+      </div> -->
+
+
+
+
+      <div class="flex flex-wrap justify-center space-x-4 mb-8">
+  <button class="category-btn bg-gray-800 text-white px-4 py-2 rounded-full">
+    All
+  </button>
+
+  <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border">
+    <a href="/category/necklaces">Necklaces</a>
+  </button>
+
+  <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border">
+    <a href="/category/rings">Rings</a>
+  </button>
+
+  <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border">
+    <a href="/category/earrings">Earrings</a>
+  </button>
+
+  <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border">
+    <a href="/category/bracelets">Bracelets</a>
+  </button>
+</div>
+
+
+
+
+
+
+
+      <!-- Product Slider -->
+      <!-- Product Slider -->
+      <!-- <div class="slider">
+        <div class="slider-container flex flex-wrap" id="product-slider"> -->
+
+
+
+<!-- ============================================================================================================================================ -->
+<section id="products" class="py-16 bg-gray-100">
+  <div class="w-full max-w-[1500px] mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-8">Our Collections</h2>
+    <p class="text-lg text-center mb-12 max-w-3xl mx-auto">
+      Discover our exquisite jewelry pieces — from classic rings to elegant necklaces and timeless bracelets.
+    </p>
+
+    <% if (products && products.length > 0) { %>
+      <!-- Full-width grid: 4 boxes per row, no extra space -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-stretch">
+        <% products.forEach(p => { %>
+          <div class="product-card bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 w-full"
+               data-id="<%= p._id %>">
+            <img
+              src="<%= p.img.startsWith('http') ? p.img : ('/' + p.img) %>"
+              alt="<%= p.name %>"
+              class="w-full h-80 object-cover rounded-lg"
+              onerror="this.style.display='none'; this.parentElement.style.backgroundColor='#f0f0f0'"
+            />
+            <h3 class="text-xl font-semibold mt-4 text-gray-800"><%= p.name %></h3>
+            <p class="text-gray-600 text-lg mb-3">₹<%= p.price %></p>
+            <button
+              class="view-btn bg-yellow-400 text-black px-5 py-2.5 rounded mt-2 w-full hover:bg-yellow-500 transition font-medium">
+              View Details
+            </button>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <p class="text-center text-gray-500">No products available.</p>
+    <% } %>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ============================================================================================================================================ -->
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Results -->
+    <div id="search-results" class="hidden">
+      <div class="flex flex-wrap" id="search-container"></div>
+      <!-- Back to Collection Button -->
+      <div class="flex justify-center mt-6">
+        <button id="back-to-collection" class="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900 hidden">
+          Back to Collection
+        </button>
+      </div>
+    </div>
+
+
+    <!-- Toast Notification (Centered) -->
+    <!-- <div id="toast" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+          bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hidden z-50 text-lg font-semibold text-center">
+        Product not found
+      </div> -->
+
+
+
+    <!-- Product Grid -->
+    <!-- <div class="flex flex-wrap" id="search-container"></div> -->
+
+
+
+    <!-- Pagination Controls --> 
+    <!-- <div class="flex justify-between items-center mt-4">
+      <button id="prev-btn" class="bg-gray-800 text-white px-4 py-2 rounded"> &larr; Previous</button>
+      <span id="page-indicator" class="text-lg font-semibold">Page 1 of 3</span>
+      <button id="next-btn" class="bg-gray-800 text-white px-4 py-2 rounded">Next &rarr;</button>
+    </div> -->
+
+    </div>
+  </section>
+
+  <!-- Modal for Product Details -->
+  <div id="product-modal" class="modal">
+    <div class="bg-white p-6 rounded-lg max-w-md w-full">
+      <span id="close-modal" class="float-right text-2xl cursor-pointer">&times;</span>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+
+  <!-- ✅ Sidebar Cart -->
+  <div id="cart-modal"
+    class="fixed top-0 right-0 h-full w-80 max-w-full bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 md:w-96 flex flex-col">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 border-b">
+      <h2 class="text-xl font-bold">Your Cart</h2>
+      <button id="close-cart" class="text-2xl">&times;</button>
+    </div>
+
+    <!-- Cart Items -->
+    <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <!-- JS will inject items here -->
+    </div>
+
+    <!-- Cart Footer (now sticks to bottom) -->
+    <div class="border-t p-4">
+      <div class="flex justify-between mb-3">
+        <span class="font-semibold">Total:</span>
+        <span id="cart-total" class="font-bold">₹0</span>
+      </div>
+      <button id="checkout-btn" class="bg-green-600 text-white px-4 py-2 rounded w-full">
+        Checkout
+      </button>
+    </div>
+  </div>
+
+
+
+
+
+
+  <!-- ✅ Checkout Modal -->
+  <div id="checkout-modal"
+    class="modal hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg max-w-md w-full relative">
+      <span id="close-checkout" class="absolute top-2 right-4 text-2xl cursor-pointer">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Checkout</h2>
+      <form id="checkout-form" class="space-y-4">
+        <input type="text" id="name" placeholder="Full Name" class="w-full border px-3 py-2 rounded" required>
+        <input type="text" id="address" placeholder="Address" class="w-full border px-3 py-2 rounded" required>
+        <input type="tel" id="phone" placeholder="Phone Number" class="w-full border px-3 py-2 rounded" required>
+
+        <div>
+          <label class="block font-semibold mb-2">Payment Method:</label>
+          <input type="radio" id="cod" name="payment" value="COD" checked>
+          <label for="cod">Cash on Delivery</label>
+        </div>
+
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded w-full">
+          Confirm Order
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <!-- Toast Notification (Centered) -->
+  <div id="toast" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+    bg-black text-white px-4 py-2 rounded-lg shadow-lg hidden z-50 text-lg font-semibold">
+  </div>
+
+
+
+
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-gray-900 text-gray-300 pt-12 pb-6">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+    <!-- 🛍️ Brand + About -->
+    <div>
+      <h1 class="text-2xl md:text-3xl font-extrabold text-white mb-4 tracking-wide">Lush Jewels</h1>
+      <p class="text-sm leading-relaxed">
+        No Rust – Just Lush Lust<br>
+        No Tarnish – Just Lush Lavish<br>
+        THE ANTI TARNISH JEWELLERY
+
+      </p>
+    </div>
+
+    <!-- 💎 Shop Links -->
+    <div>
+      <h4 class="text-lg font-semibold text-white mb-3">Shop</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/category/necklaces" class="hover:text-yellow-400 transition">Necklaces</a></li>
+        <li><a href="/category/earrings" class="hover:text-yellow-400 transition">Earrings</a></li>
+        <li><a href="/category/rings" class="hover:text-yellow-400 transition">Rings</a></li>
+        <li><a href="/category/bracelets" class="hover:text-yellow-400 transition">Bracelets</a></li>
+      </ul>
+    </div>
+
+    <!-- 📞 Customer Support -->
+    <div>
+      <h4 class="text-lg font-semibold text-white mb-3">Customer Service</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/help-center" class="hover:text-yellow-400 transition">Help Center</a></li>
+        <li><a href="/shipping-policy" class="hover:text-yellow-400 transition">Shipping & Returns</a></li>
+        <li><a href="/privacy-policy" class="hover:text-yellow-400 transition">Privacy Policy</a></li>
+        <li><a href="/terms" class="hover:text-yellow-400 transition">Terms & Conditions</a></li>
+        <li><a href="/refund-policy" class="hover:text-yellow-400 transition">Refund Policy</a></li>
+      </ul>
+    </div>
+
+
+    <!-- 📱 Contact Info -->
+    <div>
+      <h4 class="text-lg font-semibold text-white mb-3">Contact Us</h4>
+      <p class="text-sm">📧 info@vaibhavjewels.com</p>
+      <p class="text-sm mb-4">📞 +91 98765 43210</p>
+      <div class="flex space-x-4 mt-2">
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Divider -->
+  <div class="border-t border-gray-700 mt-10 pt-4 text-center text-sm text-gray-500">
+    © 2025 <span class="font-semibold text-yellow-400">VAIBHAV Jewels</span>. All rights reserved.
+  </div>
+</footer>
+
+<!-- Font Awesome for Social Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+<!-- ________________________________________________________________________________________________________________________________ -->
+
+<!-- 1]. before checkout also ask user there (if user ny ring than their finger size) -->
+
+
+<!-- 3] .after filling the form user has valid for payment -->
+
+<!-- 4]. also add a info 1)00% money back guarantee                 2)30 days return policy               3)free delivery -->
+
+<!-- 5]. add privacy policy term and condition and refund policy -->
+
+
+
+<!-- visit = sukhi.com (page 8) -->
+<!-- _____________________________________________________________________________________________________________________________ -->
+
+
+
+
+
+
+
+
+
+
+<!-- home page madhe mobile view sathi 1 box yet aahe tyajagi 2 box aale pahoje -->
+
+
+<!-- convert $ to rupees -->
+
+
+<!-- login la web chya related banavayacha aahe  -->
+
+
+
+<!-- https://docs.google.com/document/d/1II4M4mSP7g_e7R2wNhO6Ao9lcJzXu3Sr6r4OuFMXNoA/edit?usp=drivesdk -->
+
+
+
+<!-- 1. add the admin signup page and also admin details(username and password) -->
+<!-- 2. add the user signup page -->
+<!-- 2. aadd a real payment gateway -->
+
+<!-- 5. website var jast user eka time la bhagnar ka ny aani  -->
+
+<!-- 6. all collection var login nasla tar checkout la comfirm hotoy ========  // it is done now checked once-->
+
+ <!--7. home page search when happen than it show double products  -->
+
+
+ <!-- 8. after problem 6 done than buy now are not working  ===============//it is also done checked once -->
+
+ <!-- 9.now checkout button are not working in all collection -->

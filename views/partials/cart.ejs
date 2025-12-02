@@ -1,0 +1,80 @@
+<!-- ========== CART SIDEBAR ========== -->
+<div id="cart-modal"
+  class="fixed top-0 right-0 w-96 max-w-full h-full bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+
+  <!-- Header -->
+  <div class="flex justify-between items-center border-b px-6 py-4">
+    <h2 class="text-lg font-semibold">Your Cart</h2>
+    <button id="close-cart" class="text-gray-500 text-2xl hover:text-gray-700">&times;</button>
+  </div>
+
+  <!-- Cart Items -->
+  <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+
+  <!-- Footer -->
+  <div class="border-t p-6 bg-gray-50">
+    <div class="flex justify-between text-base font-semibold mb-3">
+      <span>Total:</span>
+      <span id="cart-total">₹0.00</span>
+    </div>
+  </div>
+    <!-- ✅ Checkout Button -->
+<button id="checkout-btn"
+  class="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700 transition">
+  Checkout
+</button>
+
+<script>
+  // ===== 🧠 Toast (Bottom Center, Red for Errors) =====
+  function showToast(message, type = "success") {
+    let toast = document.getElementById("toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "toast";
+      document.body.appendChild(toast);
+    }
+
+    toast.textContent = message;
+    toast.className = `fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+      z-50 px-6 py-3 rounded-xl shadow-lg text-white text-lg ${
+        type === "error" ? "bg-red-600" : "bg-green-600"
+      }`
+
+    requestAnimationFrame(() => toast.classList.add("opacity-100"));
+
+    setTimeout(() => {
+      toast.classList.remove("opacity-100");
+      setTimeout(() => toast.remove(), 300);
+    }, 2000);
+  }
+
+  // ===== 🧩 Checkout Button Login Check =====
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkoutBtn = document.getElementById("checkout-btn");
+    if (!checkoutBtn) return;
+
+    checkoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      // ✅ remove quotes around EJS so it becomes a real boolean
+      const isLoggedIn = "<%= session && session.user ? 'true' : 'false' %>" === "true";
+
+      if (isLoggedIn) {
+        // 🟢 User logged in → go to checkout
+        window.location.href = "/checkout";
+      } else {
+        // 🔴 Not logged in → red toast + delayed redirect
+        showToast("⚠ Please login to proceed to checkout.", "error");
+        setTimeout(() => {
+          window.location.href = "/user/login?message=Please login to continue";
+        }, 2000);
+      }
+    });
+  });
+</script>
+
+
+
+
+  </div>
+</div>

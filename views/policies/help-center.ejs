@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <%- include("../partials/header") %>
+
+    <section class="bg-gray-50 py-12">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
+
+        <h1 class="text-3xl font-bold mb-6">Help Center</h1>
+
+        <p class="text-gray-700 leading-7 mb-6">
+        Welcome to the Lush Jewels Help Center. Here you’ll find answers to the most common questions
+        related to orders, payments, refunds, deliveries, and support.  
+        Our aim is to ensure a smooth and secure shopping experience for every customer.
+        </p>
+
+        <!-- Section: How Can We Help -->
+        <h2 class="text-2xl font-semibold mb-3">How Can We Help You?</h2>
+        <p class="text-gray-700 leading-7 mb-6">
+        If you need assistance with anything, here are some common topics you can explore.
+        For additional help, contact our support team anytime.
+        </p>
+
+        <!-- FAQ Section -->
+        <div class="space-y-6">
+
+        <!-- FAQ Item -->
+        <div>
+            <h3 class="text-xl font-semibold">📦 Order Related Queries</h3>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+            <li>Track the status of your order</li>
+            <li>Update your delivery address (before shipment)</li>
+            <li>Cancel an order</li>
+            <li>Report issues with missing or damaged items</li>
+            </ul>
+        </div>
+
+        <!-- FAQ Item -->
+        <div>
+            <h3 class="text-xl font-semibold">💳 Payment & Billing</h3>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+            <li>Available payment options (UPI / Card / Wallet / Net Banking)</li>
+            <li>Issues with failed payments</li>
+            <li>Double payment or wrongful deductions</li>
+            <li>GST invoices / billing queries</li>
+            </ul>
+        </div>
+
+        <!-- FAQ Item -->
+        <div>
+            <h3 class="text-xl font-semibold">🔁 Returns & Refunds</h3>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+            <li>Eligibility for returns/exchanges</li>
+            <li>Refund timelines & process</li>
+            <li>Returning defective or incorrect products</li>
+            </ul>
+        </div>
+
+        <!-- FAQ Item -->
+        <div>
+            <h3 class="text-xl font-semibold">🚚 Shipping & Delivery</h3>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+            <li>Shipping charges & delivery time</li>
+            <li>Tracking your shipment</li>
+            <li>Courier partner information</li>
+            <li>Delayed delivery help</li>
+            </ul>
+        </div>
+
+        <!-- FAQ Item -->
+        <div>
+            <h3 class="text-xl font-semibold">⭐ Product Queries</h3>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+            <li>Jewelry material & quality information</li>
+            <li>Authenticity, certifications, and warranty</li>
+            <li>Sizing help (rings, bracelets, etc.)</li>
+            </ul>
+        </div>
+
+        <!-- FAQ Item -->
+        <div>
+            <h3 class="text-xl font-semibold">💬 Contact Support</h3>
+            <p class="text-gray-700 mt-2">
+            If you need personal assistance, feel free to reach out:
+            </p>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+            <li>Email: <span class="font-semibold">support@lushjewels.com</span></li>
+            <li>Phone: <span class="font-semibold">+91 98765 43210</span></li>
+            <li>Response Time: Within 24–48 hours</li>
+            </ul>
+        </div>
+
+        </div>
+
+        <!-- Last Section -->
+        <div class="mt-8 p-5 bg-gray-100 rounded-lg">
+        <p class="text-gray-800 leading-7">
+            We are committed to delivering premium jewelry and exceptional customer service.  
+            Thank you for choosing <strong>Lush Jewels</strong>.  
+            We’re always here to help!
+        </p>
+        </div>
+
+    </div>
+    </section>
+
+    <%- include("../partials/footer") %>
+</body>
+</html>

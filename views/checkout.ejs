@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - VAIBHAV Jewels</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Georgia', serif; color: #333; }
+    .error { border-color: red !important; }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- 🔹 Header -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="container mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
+      <div class="text-2xl font-bold text-gray-800">VAIBHAV Jewels</div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 md:px-6 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+    <!-- ================= LEFT SIDE ================= -->
+    <section class="lg:col-span-2 space-y-6 order-2 lg:order-1">
+
+      <!-- Contact Info -->
+      <div class="bg-white p-4 md:p-6 rounded-lg shadow">
+        <h2 class="text-lg md:text-xl font-semibold mb-4">Contact</h2>
+        <input id="email" type="text" placeholder="Email or mobile phone number" 
+               class="w-full border rounded px-4 py-2 mb-2 text-sm md:text-base">
+        <p id="email-error" class="text-red-500 text-sm hidden">Enter an email or phone number</p>
+        <label class="flex items-center gap-2 text-sm text-gray-600 mt-2">
+          <input type="checkbox" class="accent-purple-600"> Email me with news and offers
+        </label>
+      </div>
+
+      <!-- Delivery Address -->
+      <div class="bg-white p-4 md:p-6 rounded-lg shadow space-y-3">
+        <h2 class="text-lg md:text-xl font-semibold">Delivery</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <input id="fname" placeholder="First Name" class="border rounded px-4 py-2 text-sm md:text-base">
+          <input id="lname" placeholder="Last Name" class="border rounded px-4 py-2 text-sm md:text-base">
+        </div>
+        <input id="address" placeholder="House Number / Area / Locality" class="border rounded px-4 py-2 w-full text-sm md:text-base">
+        <input id="landmark" placeholder="Landmark (eg: Near Apollo Hospital)" class="border rounded px-4 py-2 w-full text-sm md:text-base">
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <input id="city" placeholder="City" class="border rounded px-4 py-2 text-sm md:text-base">
+          <select id="state" class="border rounded px-4 py-2 text-sm md:text-base">
+            <option value="">State</option>
+            <option>Maharashtra</option>
+            <!-- <option>Delhi</option>
+            <option>Karnataka</option> -->
+          </select>
+          <input id="pin" type="tel" pattern="[0-9]*" inputmode="numeric" maxlength="6"
+            placeholder="PIN Code" 
+            class="border rounded px-4 py-2 text-sm md:text-base">
+        </div>
+
+        <input id="phone" type="tel" pattern="[0-9]*" inputmode="numeric" maxlength="10"
+          placeholder="Phone" 
+          class="border rounded px-4 py-2 w-full text-sm md:text-base">
+
+        <label class="flex items-center gap-2 text-sm text-gray-600">
+          <input type="checkbox" class="accent-purple-600"> Save this information for next time
+        </label>
+      </div>
+
+      <!-- Payment -->
+      <!-- <div class="bg-white p-4 md:p-6 rounded-lg shadow space-y-3">
+        <h2 class="text-lg md:text-xl font-semibold">Payment</h2>
+        <p class="text-gray-500 text-xs md:text-sm">All transactions are secure and encrypted.</p>
+
+        <label class="flex items-center gap-2 border rounded px-4 py-3">
+          <input type="radio" name="payment" class="accent-purple-600">
+          <span class="text-sm md:text-base">Cashfree Payments (UPI, Cards, Wallets, NetBanking)</span>
+        </label>
+
+        <label class="flex items-center gap-2 border rounded px-4 py-3">
+          <input type="radio" name="payment" checked class="accent-purple-600">
+          <span class="text-sm md:text-base">Cash on Delivery (COD)</span>
+        </label>
+      </div> -->
+
+<!-- ======================================ADD A NEW PAYMENT ================================================== -->
+
+              <!-- Payment -->
+      <div class="bg-white p-4 md:p-6 rounded-lg shadow space-y-3">
+        <h2 class="text-lg md:text-xl font-semibold">Payment</h2>
+        <p class="text-gray-500 text-xs md:text-sm">All transactions are secure and encrypted.</p>
+
+        <label class="flex items-center gap-2 border rounded px-4 py-3">
+          <input type="radio" name="payment" value="Online" class="accent-purple-600">
+          <span class="text-sm md:text-base">Cashfree Payments (UPI, Cards, Wallets, NetBanking)</span>
+        </label>
+
+        <label class="flex items-center gap-2 border rounded px-4 py-3">
+          <input type="radio" name="payment" value="COD" checked class="accent-purple-600">
+          <span class="text-sm md:text-base">Cash on Delivery (COD)</span>
+        </label>
+
+      </div>
+
+
+<!-- ======================================ADD A NEW PAYMENT over================================================== -->
+
+      <button id="complete-order" 
+              class="bg-blue-600 text-white px-6 py-3 rounded w-full hover:bg-blue-700">
+              
+        Complete Order
+      </button>
+
+    </section>
+
+    <!-- ================= RIGHT SIDE ================= -->
+    <aside class="bg-white p-4 md:p-6 rounded-lg shadow h-fit order-1 lg:order-2">
+      <h2 class="text-lg md:text-xl font-semibold mb-4">Your Order</h2>
+      <div id="checkout-cart" class="space-y-4 mb-6"></div>
+
+      <div class="border-t pt-4">
+        <div class="flex justify-between text-sm mb-2">
+          <span>Subtotal</span>
+          <span id="subtotal">₹0</span>
+        </div>
+        <div class="flex justify-between text-sm mb-2">
+          <span>Shipping</span>
+          <span class="text-gray-500">Enter shipping address</span>
+        </div>
+        <div class="flex justify-between font-bold text-lg">
+          <span>Total</span>
+          <span id="total">₹0</span>
+        </div>
+      </div>
+    </aside>
+    
+
+  </main>
+
+<script>
+  // ✅ Detect if this is a single "Buy Now" checkout
+  const params = new URLSearchParams(window.location.search);
+  const single = params.get("single") === "true";
+
+  let cart = [];
+  if (single) {
+    // one product directly from query string
+    cart = [{
+      name: params.get("name"),
+      price: params.get("price"),
+      img: params.get("img"),
+      qty: parseInt(params.get("qty")) || 1
+    }];
+  } else {
+    // normal cart checkout
+    cart = JSON.parse(localStorage.getItem("cart")) || [];
+  }
+
+  const mainContainer = document.querySelector('main');
+  const checkoutContainer = document.getElementById('checkout-cart');
+  let subtotal = 0;
+
+  if (cart.length === 0) {
+    mainContainer.style.display = 'none';
+    let toast = document.createElement('div');
+    toast.textContent = '⚠ Your cart is empty!';
+    toast.className = `fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+                      z-50 px-6 py-4 rounded-xl shadow-xl text-white text-lg bg-red-600`;
+    document.body.appendChild(toast);
+  } else {
+    // ✅ Render all products
+    cart.forEach(item => {
+      const price = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
+      const qty = item.qty || 1;
+      subtotal += price * qty; // ✅ FIX: subtotal now updates properly
+
+      checkoutContainer.innerHTML += `
+        <div class="flex items-center justify-between border rounded p-2">
+          <img src="${item.img}" class="w-14 h-14 object-cover rounded">
+          <div class="flex-1 ml-3">
+            <p class="text-sm font-medium">${item.name || item.title}</p>
+            <p class="text-xs text-gray-500">Qty: ${qty}</p>
+          </div>
+          <p class="text-sm font-semibold">₹${(price * qty).toFixed(2)}</p>
+        </div>
+      `;
+    });
+
+    // ✅ Update totals
+    document.getElementById('subtotal').textContent = "₹" + subtotal.toFixed(2);
+    document.getElementById('total').textContent = "₹" + subtotal.toFixed(2);
+  }
+
+  // ✅ Toast
+  function showToast(message, type="success") {
+    let toast = document.getElementById('toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.className = `fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+                      z-50 px-6 py-4 rounded-xl shadow-xl text-white text-lg ${
+                        type === "error" ? "bg-red-600" : "bg-green-600"
+                      }`;
+    setTimeout(()=> toast.remove(), 2500);
+  }
+
+  // ====================================✅ Order complete==========================================================
+  // Centered toast helper
+  function showToast(message, type = "success") {
+    let toast = document.getElementById("toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "toast";
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.className = `fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+      z-50 px-6 py-4 rounded-xl shadow-xl text-white text-lg ${
+        type === "error" ? "bg-red-600" : "bg-green-600"
+      }`;
+    setTimeout(() => toast.remove(), 2500);
+  }
+
+  // Single-click checkout handler — only one POST to /user/checkout
+document.addEventListener("DOMContentLoaded", () => {
+  const completeBtn = document.getElementById("complete-order");
+  if (!completeBtn) return;
+
+  completeBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    try {
+      // 🔴 Reset previous highlights
+      document.querySelectorAll("input, textarea, select").forEach(el => {
+        el.classList.remove("border-red-500");
+      });
+
+      // 🟢 Validate required fields
+      const fields = [
+        "email", "fname", "lname", "address",
+        "landmark", "city", "state", "pin", "phone"
+      ];
+
+      let allFilled = true;
+      for (const id of fields) {
+        const el = document.getElementById(id);
+        if (!el || !el.value.trim()) {
+          el.classList.add("border-red-500"); // 🔴 highlight empty fields
+          allFilled = false;
+        }
+      }
+
+      if (!allFilled) {
+        showToast("⚠ Fill all required fields", "error");
+        return;
+      }
+
+      // 📞 Validate phone and PIN
+      const phoneEl = document.getElementById("phone");
+      const pinEl = document.getElementById("pin");
+      const phone = phoneEl.value.trim();
+      const pin = pinEl.value.trim();
+
+      let valid = true;
+
+      if (!/^\d{10}$/.test(phone)) {
+        phoneEl.classList.add("border-red-500");
+        valid = false;
+        showToast("⚠ Invalid phone number", "error");
+      }
+
+      if (!/^\d{6}$/.test(pin)) {
+        pinEl.classList.add("border-red-500");
+        valid = false;
+        showToast("⚠ Invalid PIN code", "error");
+      }
+
+      if (!valid) return;
+
+      // ✅ Get selected payment method
+      const paymentMethod = document.querySelector('input[name="payment"]:checked')?.value || "COD";
+
+      // ✅ Build userInfo
+      const userInfo = {
+        email: document.getElementById("email").value,
+        fname: document.getElementById("fname").value,
+        lname: document.getElementById("lname").value,
+        phone,
+        address: document.getElementById("address").value,
+        landmark: document.getElementById("landmark").value,
+        city: document.getElementById("city").value,
+        state: document.getElementById("state").value,
+        pin,
+        paymentMethod,
+      };
+
+      // 🛒 Check cart/subtotal
+      if (typeof cart === "undefined" || !Array.isArray(cart) || cart.length === 0)
+        return showToast("⚠ Cart is empty", "error");
+      if (typeof subtotal === "undefined")
+        return showToast("⚠ Subtotal not found", "error");
+
+      const totalAmount = parseFloat(subtotal).toFixed(2);
+
+      // 🟢 Submit order
+      const res = await fetch("/user/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userInfo, items: cart, totalAmount }),
+      });
+
+      let data;
+      try { data = await res.json(); } catch (err) { data = null; }
+
+      if (res.ok && data && data.success) {
+        showToast("✅ Order placed successfully!");
+        setTimeout(() => (window.location.href = "/"), 1500);
+      } else {
+        const msg = data?.message || `Server error (${res.status})`;
+        showToast("⚠ " + msg, "error");
+      }
+    } catch (err) {
+      console.error("❌ Checkout error:", err);
+      showToast("⚠ Server error. Try again.", "error");
+    }
+  });
+});
+
+
+
+
+</script>
+
+
+</body>
+</html>

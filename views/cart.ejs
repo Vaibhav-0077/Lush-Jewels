@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart - VAIBHAV Jewels</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Georgia', serif; color: #333; }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold text-gray-800">VAIBHAV Jewels</div>
+      <nav class="hidden md:flex space-x-6">
+        <a href="/" class="text-gray-600 hover:text-gray-900">Home</a>
+        <a href="/category/necklaces" class="text-gray-600 hover:text-gray-900">Necklaces</a>
+        <a href="/category/rings" class="text-gray-600 hover:text-gray-900">Rings</a>
+        <a href="/category/earrings" class="text-gray-600 hover:text-gray-900">Earrings</a>
+        <a href="/category/bracelets" class="text-gray-600 hover:text-gray-900">Bracelets</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Cart Section -->
+  <main class="container mx-auto px-6 py-12">
+    <h1 class="text-3xl font-bold mb-6 text-center">Your Cart</h1>
+
+    <div id="cart-container" class="bg-white rounded-lg shadow-md p-6 space-y-4"></div>
+
+    <div id="cart-summary" class="text-center mt-8 hidden">
+      <p class="text-xl font-semibold">Subtotal: <span id="subtotal">₹0</span></p>
+      <button id="checkout-btn"
+        class="bg-purple-600 text-white px-8 py-3 rounded mt-4 hover:bg-purple-700 transition">
+        Proceed to Checkout →
+      </button>
+    </div>
+
+    <div id="empty-cart" class="hidden text-center text-gray-500 text-lg mt-10">
+      🛍️ Your cart is empty. <br>
+      <a href="/" class="text-blue-600 underline">Continue Shopping</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <!-- Footer -->
+  <footer id="contact" class="bg-gray-900 text-gray-300 pt-12 pb-6">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+    <!-- 🛍️ Brand + About -->
+    <div>
+      <h1 class="text-2xl md:text-3xl font-extrabold text-white mb-4 tracking-wide">Lush Jewels</h1>
+      <p class="text-sm leading-relaxed">
+        No Rust – Just Lush Lust<br>
+        No Tarnish – Just Lush Lavish<br>
+        THE ANTI TARNISH JEWELLERY
+
+      </p>
+    </div>
+
+    <!-- 💎 Shop Links -->
+    <div>
+      <h4 class="text-lg font-semibold text-white mb-3">Shop</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/category/necklaces" class="hover:text-yellow-400 transition">Necklaces</a></li>
+        <li><a href="/category/earrings" class="hover:text-yellow-400 transition">Earrings</a></li>
+        <li><a href="/category/rings" class="hover:text-yellow-400 transition">Rings</a></li>
+        <li><a href="/category/bracelets" class="hover:text-yellow-400 transition">Bracelets</a></li>
+      </ul>
+    </div>
+
+    <!-- 📞 Customer Support -->
+    <div>
+      <h4 class="text-lg font-semibold text-white mb-3">Customer Service</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/help-center" class="hover:text-yellow-400 transition">Help Center</a></li>
+        <li><a href="/shipping-policy" class="hover:text-yellow-400 transition">Shipping & Returns</a></li>
+        <li><a href="/privacy-policy" class="hover:text-yellow-400 transition">Privacy Policy</a></li>
+        <li><a href="/terms" class="hover:text-yellow-400 transition">Terms & Conditions</a></li>
+        <li><a href="/refund-policy" class="hover:text-yellow-400 transition">Refund Policy</a></li>
+      </ul>
+    </div>
+
+
+    <!-- 📱 Contact Info -->
+    <div>
+      <h4 class="text-lg font-semibold text-white mb-3">Contact Us</h4>
+      <p class="text-sm">📧 info@vaibhavjewels.com</p>
+      <p class="text-sm mb-4">📞 +91 98765 43210</p>
+      <div class="flex space-x-4 mt-2">
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Divider -->
+  <div class="border-t border-gray-700 mt-10 pt-4 text-center text-sm text-gray-500">
+    © 2025 <span class="font-semibold text-yellow-400">VAIBHAV Jewels</span>. All rights reserved.
+  </div>
+</footer>
+
+  <!-- Script -->
+  <script>
+    const cartContainer = document.getElementById('cart-container');
+    const subtotalEl = document.getElementById('subtotal');
+    const emptyCart = document.getElementById('empty-cart');
+    const cartSummary = document.getElementById('cart-summary');
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    if (cart.length === 0) {
+      emptyCart.classList.remove('hidden');
+      cartSummary.classList.add('hidden');
+    } else {
+      let subtotal = 0;
+
+      cart.forEach((item, index) => {
+        const priceNum = parseFloat(item.price.replace(/[^0-9.]/g,'')) || 0;
+        const total = priceNum * (item.qty || 1);
+        subtotal += total;
+
+        const div = document.createElement('div');
+        div.className = "flex items-center justify-between border-b pb-4";
+
+        div.innerHTML = `
+          <div class="flex items-center gap-4">
+            <img src="${item.img}" alt="${item.name}" class="w-20 h-20 rounded object-cover">
+            <div>
+              <h3 class="font-semibold text-gray-800">${item.name}</h3>
+              <p class="text-gray-600 text-sm">Qty: ${item.qty || 1}</p>
+              <p class="text-gray-900 font-bold">₹${(total).toFixed(2)}</p>
+            </div>
+          </div>
+          <button onclick="removeItem(${index})" 
+                  class="text-red-500 text-sm hover:underline">Remove</button>
+        `;
+
+        cartContainer.appendChild(div);
+      });
+
+      subtotalEl.textContent = "₹" + subtotal.toFixed(2);
+      cartSummary.classList.remove('hidden');
+    }
+
+    function removeItem(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.reload();
+    }
+
+    // document.getElementById('checkout-btn').addEventListener('click', () => {
+    //   window.location.href = "/checkout";
+    // });
+
+    document.getElementById("checkout-btn").addEventListener("click", () => {
+      // Check if user is logged in from session variable (rendered by server)
+      const isLoggedIn = "<%= session && session.user ? 'true' : 'false' %>";
+
+
+      if (isLoggedIn === "true") {
+        window.location.href = "/checkout";
+      } else {
+        showToast("⚠ Please login to proceed to checkout.", "error");
+        setTimeout(() => {
+          window.location.href = "/user/login?message=Please login to continue";
+        }, 1500);
+      }
+    });
+
+
+    
+  </script>
+
+</body>
+</html>
