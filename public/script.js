@@ -268,27 +268,27 @@ handleSearch('mobile-search-input', 'mobile-search-btn');
 
 
 // ================= PAGINATION =================
-const pages = Array.from(document.querySelectorAll('.page'));
-let currentPage = 1;
-const totalPages = pages.length;
-const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');
-const pageIndicator = document.getElementById('page-indicator');
-const paginationControls = prevBtn ? prevBtn.parentElement : null;
+// const pages = Array.from(document.querySelectorAll('.page'));
+// let currentPage = 1;
+// const totalPages = pages.length;
+// const prevBtn = document.getElementById('prev-btn');
+// const nextBtn = document.getElementById('next-btn');
+// const pageIndicator = document.getElementById('page-indicator');
+// const paginationControls = prevBtn ? prevBtn.parentElement : null;
 
-function showPage(n) {
-  if (n < 1) n = 1;
-  if (n > totalPages) n = totalPages;
-  currentPage = n;
+// function showPage(n) {
+//   if (n < 1) n = 1;
+//   if (n > totalPages) n = totalPages;
+//   currentPage = n;
 
-  pages.forEach((p, i) => p.classList.toggle('hidden', i !== currentPage - 1));
-  if (pageIndicator) pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
-  if (prevBtn) prevBtn.disabled = currentPage === 1;
-  if (nextBtn) nextBtn.disabled = currentPage === totalPages;
-}
-if (prevBtn) prevBtn.addEventListener('click', () => showPage(currentPage - 1));
-if (nextBtn) nextBtn.addEventListener('click', () => showPage(currentPage + 1));
-showPage(1);
+//   pages.forEach((p, i) => p.classList.toggle('hidden', i !== currentPage - 1));
+//   if (pageIndicator) pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+//   if (prevBtn) prevBtn.disabled = currentPage === 1;
+//   if (nextBtn) nextBtn.disabled = currentPage === totalPages;
+// }
+// if (prevBtn) prevBtn.addEventListener('click', () => showPage(currentPage - 1));
+// if (nextBtn) nextBtn.addEventListener('click', () => showPage(currentPage + 1));
+// showPage(1);
 
 // ================= SEARCH =================
 const searchResults = document.getElementById('search-results');
@@ -333,8 +333,8 @@ function performSearch(queryRaw) {
 
 
   // Hide all pages + pagination
-  pages.forEach(p => p.classList.add('hidden'));
-  if (paginationControls) paginationControls.classList.add('hidden');
+  // pages.forEach(p => p.classList.add('hidden'));
+  // if (paginationControls) paginationControls.classList.add('hidden');
 
   searchContainer.innerHTML = '';
 
@@ -368,31 +368,21 @@ setupSearch('mobile-search-input', 'mobile-search-btn');
 
 
 backBtn.addEventListener('click', () => {
-  // Hide search result section
   searchResults.classList.add('hidden');
   searchContainer.innerHTML = '';
 
-  // ✅ Show all product cards again (remove inline style display:none)
   document.querySelectorAll('.product-card').forEach(card => {
     card.style.display = '';
   });
 
-  // Reset pages
-  pages.forEach(p => p.classList.add('hidden'));
-  showPage(1);
-
-  // Restore pagination
-  if (paginationControls) paginationControls.classList.remove('hidden');
-
-  // Hide back button again
   backBtn.classList.add('hidden');
 
-  // ✅ Scroll back to the Products (Collections) section
   const productsSection = document.getElementById('products');
   if (productsSection) {
     productsSection.scrollIntoView({ behavior: 'smooth' });
   }
 });
+
 
 
 
@@ -467,7 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// =======================================================================================
+// =======================================================================================================
 
 
 if (closeCheckout) {
@@ -572,3 +562,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+

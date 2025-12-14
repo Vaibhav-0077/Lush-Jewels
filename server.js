@@ -90,15 +90,17 @@ app.use("/category", categoryRoutes); // category routes last
 
 
 // ✅ Home page — show latest 8 products
+// Home page — show all products
 app.get("/", async (req, res) => {
   try {
-    const products = await Product.find().limit(8);
+    const products = await Product.find().sort({ createdAt: -1 });
     res.render("index", { products });
   } catch (err) {
     console.error("❌ Failed to load products:", err);
     res.render("index", { products: [] });
   }
 });
+
 
 
 // 🚫 Prevent browsers from caching any admin pages
