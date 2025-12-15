@@ -10,29 +10,27 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
+
+
 <body class="bg-gray-50">
   <!-- Header -->
   <header
       class="sticky top-0 z-50 shadow-md"
       style="background-color: #f8e8ee;"
     >
-
     <div class="container mx-auto px-6 py-4">
       <div class="flex items-center">
-        <!-- Left: Site Title -->
-         
-        <!-- <div class="text-2xl font-bold text-gray-800 flex-shrink-0">Lush Jewels</div> -->
-         <!-- Left: Logo + Site Title -->
-        <div class="flex items-center gap-2 flex-shrink-0">
-          <img
-            src="https://sukkhi.com/cdn/shop/files/www.sukkhi_500x.png?v=1660311066"
-            alt="Lush Jewellery Logo"
-            class="w-8 h-8 lg:w-10 lg:h-10 object-contain"
-          />
-          <span class="text-xl lg:text-2xl font-bold text-gray-800">
-            Lush Jewels
-          </span>
-        </div>
+        <div class="text-2xl font-bold text-gray-800 flex-shrink-0">Lush Jewels</div>
+          <!-- <div class="flex items-center flex-shrink-0 bg-black">
+            <a href="/">
+              <img
+                src="/images/lush_jewels_logo.png"
+                alt="Lush Jewellery Logo"
+                class="h-10 sm:h-12 md:h-12 w-auto object-contain"
+              />
+            </a>
+          </div> -->
+
 
 
         <!-- Center: Search Box (hidden on small screens) -->
@@ -114,93 +112,45 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <!-- <section id="home" class="hero-bg text-white py-20 px-6">
-    <div class="container mx-auto text-center">
-      <h1 class="text-5xl font-bold mb-4 animate-fade-in">Discover Timeless Elegance</h1>
-      <p class="text-1xl mb-8">
-
-        JEWELLERY THAT FEELS AS NATURAL AS YOUR EVERYDAY GLOW
-        JEWELLERY CRAFTED TO SHINE WITH YOU EVERY DAY<br>
-        WEAR THE GLOW OF LUSH
-        BECAUSE LIFE DESERVES LUSH
-        WEAR THE GLOW OF LUSH
-
-      </p>
-      <a href="#products"
-        class="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
-        Explore Our Collection
-      </a>
-      <div class="mt-10">
-        <img
-          src="https://www.pipldelhi.com/wp-content/uploads/2018/03/jewllery.jpg"
-          alt="Vintage style jewelry display showcasing sparkling diamonds, emeralds, and gold pieces arranged elegantly on a luxurious velvet backdrop with soft candlelight illumination highlighting intricate engravings and gem facets"
-          class="w-full h-auto object-cover rounded-lg" onerror="this.style.display='none'" />
-      </div>
-    </div>
-   FIRST IMAGE =  src="https://www.katerinaperez.com/uploads/article/image/1308/article_page_Moksh_banner.jpg"
-    SECONG IMAGE = src="https://tse1.mm.bing.net/th/id/OIP.vVEzcZnyFMsE7ZEBz_DdTgHaHc?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
-  </section> -->
 
 
   <!-- Hero Section -->
-<!-- Hero Section -->
 <section
-    id="home"
-    class="py-12 lg:py-16"
-    style="background: linear-gradient(135deg, #f8e8ee, #fdecef);"
-  >
+  id="home"
+  class="relative w-full bg-no-repeat bg-center bg-cover
+         h-[320px] sm:h-[420px] md:h-[520px] lg:h-[95vh]"
+  style="background-image: url('/images/lush-jewels-hero.jpg');"
+>
+  <!-- Overlay Content -->
+  <div class="absolute inset-0 flex flex-col items-center justify-end pb-8 sm:pb-12 text-center px-4">
+    
+    <h1
+      class="text-lg sm:text-2xl md:text-3xl lg:text-4xl
+             font-serif font-semibold text-white
+             mb-3 drop-shadow-lg"
+    >
+      Discover Timeless Elegance & Artistry
+    </h1>
 
-  <div class="container mx-auto px-4 lg:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-
-    <!-- LEFT: Images -->
-    <div class="flex gap-4 lg:gap-6 justify-center lg:justify-start">
-
-      <!-- Image 1 -->
-      <div class="w-[120px] h-[180px] sm:w-[140px] sm:h-[220px] lg:w-[220px] lg:h-[260px]">
-        <img
-        src="https://www.katerinaperez.com/uploads/article/image/1308/article_page_Moksh_banner.jpg"
-        alt="Jewellery product"
-        class="w-full h-full object-cover rounded-md shadow-sm"
-        />
-      </div>
-      
-      <!-- Image 2 -->
-      <div class="w-[150px] h-[220px] sm:w-[180px] sm:h-[260px] lg:w-[280px] lg:h-[340px]">
-        <img
-        src="https://tse1.mm.bing.net/th/id/OIP.vVEzcZnyFMsE7ZEBz_DdTgHaHc?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
-          alt="Model wearing jewellery"
-          class="w-full h-full object-cover rounded-md shadow-sm"
-        />
-      </div>
-
-    </div>
-
-    <!-- RIGHT: Content -->
-    <div class="text-gray-900 max-w-md text-center lg:text-left mx-auto lg:mx-0">
-      <!-- <p class="text-xs tracking-widest text-gray-500 uppercase mb-3">
-        Our Waterproof Jewellery
-      </p> -->
-
-      <h1 class="text-3xl sm:text-4xl  font-bold leading-tight mb-4">
-        Discover Timeless Elegance
-      </h1>
-
-      <p class="text-gray-600 mb-6 leading-relaxed text-sm sm:text-base">
-        JEWELLERY THAT FEELS AS NATURAL AS YOUR EVERYDAY GLOW JEWELLERY CRAFTED TO SHINE WITH YOU EVERY DAY
-        WEAR THE GLOW OF LUSH BECAUSE LIFE DESERVES LUSH WEAR THE GLOW OF LUSH
-      </p>
-
-      <a
-        href="#products"
-        class="inline-block bg-black text-white px-7 py-3 text-sm font-semibold rounded hover:bg-gray-800 transition"
-      >
-        Shop Now →
-      </a>
-    </div>
+    <a
+      href="#products"
+      class="inline-block
+             bg-[#f8e8ee] text-gray-900
+             px-5 py-2 text-sm
+             sm:px-7 sm:py-3 sm:text-base
+             rounded-full font-semibold
+             hover:bg-white transition shadow-lg"
+    >
+      Shop Now
+    </a>
 
   </div>
 </section>
+
+
+
+
+
 
 
 
@@ -313,9 +263,22 @@
             <h3 class="text-xl font-semibold mt-4 text-gray-800"><%= p.name %></h3>
             <p class="text-gray-600 text-lg mb-3">₹<%= p.price %></p>
             <button
-              class="view-btn bg-pink-400 text-black px-5 py-2.5 rounded mt-2 w-full hover:bg-pink-500 transition font-medium">
+              class="relative w-full px-6 py-3 mt-2
+                    rounded-full
+                    bg-gradient-to-r from-pink-300 to-pink-400
+                    text-gray-900 font-medium
+                    shadow-lg
+                    hover:from-pink-400 hover:to-pink-500
+                    transition">
+
+              <!-- Inner white border -->
+              <span
+                class="absolute inset-1 rounded-full border border-white/100 pointer-events-none">
+              </span>
+
               View Details
             </button>
+
           </div>
         <% }) %>
       </div>
@@ -454,14 +417,19 @@
 
     <!-- 🛍️ Brand + About -->
     <div>
-      <h1 class="text-2xl md:text-3xl font-extrabold text-white mb-4 tracking-wide">Lush Jewels</h1>
-      <!-- <p class="text-sm leading-relaxed">
-        No Rust – Just Lush Lust<br>
-        No Tarnish – Just Lush Lavish<br>
-        THE ANTI TARNISH JEWELLERY
+  <h1 class="text-2xl md:text-3xl font-extrabold text-white mb-4 tracking-wide">
+    Lush Jewels
+  </h1>
 
-      </p> -->
-    </div>
+  <a href="/">
+              <img
+                src="/images/lush_jewels_logo.png"
+                alt="Lush Jewellery Logo"
+                class="h-20 sm:h-12 md:h-52"
+              />
+            </a>
+</div>
+
 
     <!-- 💎 Shop Links -->
     <div>
