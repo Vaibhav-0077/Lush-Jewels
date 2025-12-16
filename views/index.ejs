@@ -21,12 +21,12 @@
     <div class="container mx-auto px-6 py-4">
       <div class="flex items-center">
         <!-- <div class="text-2xl font-bold text-gray-800 flex-shrink-0">Lush Jewels</div> -->
-          <div class="flex items-center flex-shrink-0 bg-black">
+          <div class="flex items-center flex-shrink-0">
             <a href="/">
               <img
-                src="/images/lush_header_logo.png"
+                src="/images/lush_jewels_header_logo.png"
                 alt="Lush Jewellery Logo"
-                class="h-10 sm:h-12 md:h-16 w-auto object-contain"
+                class="h-10 sm:h-14 md:h-18 w-auto object-contain"
               />
             </a>
           </div>
@@ -156,31 +156,31 @@
 
 
   <!-- About Section -->
-  <section
+<section
   id="about"
-  class="py-16 px-6"
-  style="
-    background-color: #f8e8ee;
-    border-top: 1px solid #e6cfd6;
-    border-bottom: 1px solid #e6cfd6;
-    box-shadow: inset 0 1px 0 rgba(244, 190, 190, 0.6),
-                inset 0 -1px 0 rgba(244,190,190,0.6);
-  "
+  class="py-16 px-6
+         bg-[linear-gradient(135deg,#ffffff_0%,#f8e8ee_55%,#f2c2cf_100%)]
+         border-t border-[#e6cfd6]
+         border-b border-[#e6cfd6]
+         shadow-[inset_0_1px_0_rgba(244,190,190,0.6),inset_0_-1px_0_rgba(244,190,190,0.6)]"
 >
 
-    <div class="container mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-4">Our Story</h2>
-      <p class="text-lg mb-8 max-w-2xl mx-auto">
-        <!-- At AW Jewels ,-->
-        At Lush Jewellery, we believe luxury should be a part of every day & not just special occasions. Our mission is
-        simple, to bring you jewellery that is beautiful, durable, and affordable without ever compromising on quality.
-        Each piece is crafted with care, designed to be anti-tarnish and long-lasting, so you can shine with confidence
-        wherever life takes you.
-        We believe in keeping our customers at the heart of everything we do.
+  <div class="container mx-auto text-center">
+    
+    <h2 class="text-4xl font-bold mb-4">Our Story</h2>
 
-      </p>
-    </div>
-  </section>
+    <p class="text-lg mb-8 max-w-2xl mx-auto">
+      At Lush Jewellery, we believe luxury should be a part of every day & not just special occasions.
+      Our mission is simple, to bring you jewellery that is beautiful, durable, and affordable without
+      ever compromising on quality. Each piece is crafted with care, designed to be anti-tarnish and
+      long-lasting, so you can shine with confidence wherever life takes you.
+      We believe in keeping our customers at the heart of everything we do.
+    </p>
+
+  </div>
+</section>
+
+
 
   <!-- Products Section -->
   <!-- <section id="products" class="py-16 px-6 bg-gray-100"> -->
@@ -205,27 +205,63 @@
 
 
 
-      <div class="flex flex-wrap justify-center space-x-4 mb-8">
-  <button class="category-btn bg-gray-800 text-white px-4 py-2 rounded-full">
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
+
+  <!-- Active / All -->
+  <a href="/category/all"
+     class="px-6 py-2 rounded-full text-sm font-semibold tracking-wide
+            bg-gradient-to-r from-pink-500 to-pink-700
+            text-white shadow-lg shadow-pink-500/40
+            hover:scale-105 transition-all duration-300">
     All
-  </button>
+  </a>
 
-  <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border">
-    <a href="/category/necklaces">Necklaces</a>
-  </button>
+  <a href="/category/necklaces"
+     class="px-6 py-2 rounded-full text-sm font-semibold tracking-wide
+            bg-gradient-to-r from-white to-pink-200
+            text-pink-900 border border-pink-300
+            shadow-md shadow-pink-300/30
+            hover:from-pink-400 hover:to-pink-600 hover:text-white
+            hover:shadow-lg hover:shadow-pink-500/40
+            hover:scale-105 transition-all duration-300">
+    Necklaces
+  </a>
 
-  <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border">
-    <a href="/category/rings">Rings</a>
-  </button>
+  <a href="/category/rings"
+     class="px-6 py-2 rounded-full text-sm font-semibold tracking-wide
+            bg-gradient-to-r from-white to-pink-200
+            text-pink-900 border border-pink-300
+            shadow-md shadow-pink-300/30
+            hover:from-pink-400 hover:to-pink-600 hover:text-white
+            hover:shadow-lg hover:shadow-pink-500/40
+            hover:scale-105 transition-all duration-300">
+    Rings
+  </a>
 
-  <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border">
-    <a href="/category/earrings">Earrings</a>
-  </button>
+  <a href="/category/earrings"
+     class="px-6 py-2 rounded-full text-sm font-semibold tracking-wide
+            bg-gradient-to-r from-white to-pink-200
+            text-pink-900 border border-pink-300
+            shadow-md shadow-pink-300/30
+            hover:from-pink-400 hover:to-pink-600 hover:text-white
+            hover:shadow-lg hover:shadow-pink-500/40
+            hover:scale-105 transition-all duration-300">
+    Earrings
+  </a>
 
-  <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border">
-    <a href="/category/bracelets">Bracelets</a>
-  </button>
+  <a href="/category/bracelets"
+     class="px-6 py-2 rounded-full text-sm font-semibold tracking-wide
+            bg-gradient-to-r from-white to-pink-200
+            text-pink-900 border border-pink-300
+            shadow-md shadow-pink-300/30
+            hover:from-pink-400 hover:to-pink-600 hover:text-white
+            hover:shadow-lg hover:shadow-pink-500/40
+            hover:scale-105 transition-all duration-300">
+    Bracelets
+  </a>
+
 </div>
+
 
 
 
@@ -263,7 +299,7 @@
             <h3 class="text-xl font-semibold mt-4 text-gray-800"><%= p.name %></h3>
             <p class="text-gray-600 text-lg mb-3">₹<%= p.price %></p>
             <button
-              class="relative w-full px-6 py-3 mt-2
+              class="view-btn relative w-full px-6 py-3 mt-2
                     rounded-full
                     bg-gradient-to-r from-pink-300 to-pink-400
                     text-gray-900 font-medium
@@ -417,19 +453,19 @@
 
     <!-- 🛍️ Brand + About -->
     <div>
-  <h1 class="text-2xl md:text-3xl font-extrabold text-white mb-4 tracking-wide">
-    Lush Jewels
-  </h1>
+        <h1 class="text-2xl md:text-3xl font-extrabold text-white mb-4 tracking-wide">
+          Lush Jewels
+        </h1>
 
-  <a href="/">
-  <img
-    src="/images/lush_jewels_logo.png"
-    alt="Lush Jewellery Logo"
-    class="h-20 sm:h-28 md:h-32 ml-11  object-contain"
-  />
-</a>
+        <a href="/">
+        <img
+          src="/images/lush_jewels_logo.png"
+          alt="Lush Jewellery Logo"
+          class="h-20 sm:h-28 md:h-32 ml-11  object-contain"
+        />
+      </a>
 
-</div>
+    </div>
 
 
     <!-- 💎 Shop Links -->
