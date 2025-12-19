@@ -156,17 +156,22 @@
                   <p class="text-gray-600 text-lg mb-3">₹<%= p.price %>
                   </p>
                   <button
-                    class="view-btn relative w-full px-6 py-3 mt-2
+                    class="view-btn relative w-full mt-2 px-[60px] py-4
                           rounded-full
-                          bg-gradient-to-r from-pink-300 to-pink-400
-                          text-gray-900 font-medium
-                          shadow-lg
-                          hover:from-pink-400 hover:to-pink-500
-                          transition">
-
+                          text-white text-[16px] font-bold tracking-[1px]
+                          cursor-pointer
+                          bg-[linear-gradient(135deg,#d9828c_0%,#d9828c_20%,#d9828c_60%,#d9828c_100%)]
+                          
+                          shadow-[inset_0_2px_6px_rgba(255,255,255,0.8),inset_0_-4px_8px_rgba(180,80,90,0.35),0_12px_25px_rgba(215,120,130,0.45)]
+                          
+                          transition-all duration-300 ease-in-out
+                          hover:-translate-y-0.5
+                          hover:shadow-[inset_0_2px_6px_rgba(255,255,255,0.9),inset_0_-4px_10px_rgba(180,80,90,0.45),0_16px_30px_rgba(215,120,130,0.6)]
+                        "
+                      >
                     <!-- Inner white border -->
                     <span
-                      class="absolute inset-1 rounded-full border border-white/100 pointer-events-none">
+                      class="pointer-events-none absolute inset-[6px] rounded-full border-[3px] border-white/90">
                     </span>
 
                     View Details

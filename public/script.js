@@ -331,6 +331,11 @@ function performSearch(queryRaw) {
   }
 
 
+  // ==================================added later ===============================================
+  
+  // ==================================added later ended===============================================
+
+
 
   // Hide all pages + pagination
   // pages.forEach(p => p.classList.add('hidden'));

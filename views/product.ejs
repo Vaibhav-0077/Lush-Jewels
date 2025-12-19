@@ -189,19 +189,88 @@
 
       <div class="flex gap-4 pt-4">
         <button id="add-to-cart"
-          class="flex-1 border-2 border-pink-400 text-pink-500 font-semibold px-6 py-3 rounded hover:bg-pink-100">
+          class="relative w-full
+                px-4 py-3 text-sm           /* 📱 Mobile size */
+                md:px-6 md:py-4 md:text-base /* 💻 Desktop size (unchanged) */
+
+                rounded-full
+                font-bold tracking-wide text-white
+                bg-[linear-gradient(135deg,#d9828c_0%,#d9828c_100%)]
+                border-none cursor-pointer
+
+                shadow-[inset_0_2px_6px_rgba(255,255,255,0.8),inset_0_-4px_8px_rgba(180,80,90,0.35),0_12px_25px_rgba(215,120,130,0.45)]
+                transition-all duration-300 ease-in-out
+                hover:-translate-y-0.5
+                hover:shadow-[inset_0_2px_6px_rgba(255,255,255,0.9),inset_0_-4px_10px_rgba(180,80,90,0.45),0_16px_30px_rgba(215,120,130,0.6)]
+                "
+              >
+              <!-- Inner white border -->
+              <span
+                class="
+                  absolute pointer-events-none
+                  inset-1 md:inset-1.5
+                  rounded-full
+                  border-2 border-white/90
+                "
+              ></span>
           ADD TO CART
         </button>
 
         <% if (session && session.user) { %>
           <button
             id="buy-now"
-            class="flex-1 text-center bg-purple-600 text-white font-semibold px-6 py-3 rounded hover:bg-purple-700">
+            class="relative w-full
+                px-4 py-3 text-sm           /* 📱 Mobile size */
+                md:px-6 md:py-4 md:text-base /* 💻 Desktop size (unchanged) */
+
+                rounded-full
+                font-bold tracking-wide text-white
+                bg-[linear-gradient(135deg,#d9828c_0%,#d9828c_100%)]
+                border-none cursor-pointer
+
+                shadow-[inset_0_2px_6px_rgba(255,255,255,0.8),inset_0_-4px_8px_rgba(180,80,90,0.35),0_12px_25px_rgba(215,120,130,0.45)]
+                transition-all duration-300 ease-in-out
+                hover:-translate-y-0.5
+                hover:shadow-[inset_0_2px_6px_rgba(255,255,255,0.9),inset_0_-4px_10px_rgba(180,80,90,0.45),0_16px_30px_rgba(215,120,130,0.6)]
+                "
+              >
+              <!-- Inner white border -->
+              <span
+                class="
+                  absolute pointer-events-none
+                  inset-1 md:inset-1.5
+                  rounded-full
+                  border-2 border-white/90
+                "
+              ></span>
             BUY IT NOW
           </button>
         <% } else { %>
           <a href="/user/login?message=Please login to buy products"
-            class="flex-1 text-center bg-gray-400 text-white font-semibold px-6 py-3 rounded cursor-not-allowed">
+            class="relative w-full text-center
+                px-4 py-3 text-sm           /* 📱 Mobile size */
+                md:px-6 md:py-4 md:text-base /* 💻 Desktop size (unchanged) */
+
+                rounded-full
+                font-bold tracking-wide text-white
+                bg-[linear-gradient(135deg,#d9828c_0%,#d9828c_100%)]
+                border-none cursor-pointer
+
+                shadow-[inset_0_2px_6px_rgba(255,255,255,0.8),inset_0_-4px_8px_rgba(180,80,90,0.35),0_12px_25px_rgba(215,120,130,0.45)]
+                transition-all duration-300 ease-in-out
+                hover:-translate-y-0.5
+                hover:shadow-[inset_0_2px_6px_rgba(255,255,255,0.9),inset_0_-4px_10px_rgba(180,80,90,0.45),0_16px_30px_rgba(215,120,130,0.6)]
+                "
+              >
+              <!-- Inner white border -->
+              <span
+                class="
+                  absolute pointer-events-none
+                  inset-1 md:inset-1.5
+                  rounded-full
+                  border-2 border-white/90
+                "
+              ></span>
             LOGIN TO BUY
           </a>
         <% } %>
