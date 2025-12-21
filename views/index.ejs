@@ -7,6 +7,71 @@
   <title>Lush Jewels - Timeless Luxury</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .global-video {
+  background: #0b0612;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.global-video h2 {
+  font-size: 42px;
+  margin-bottom: 40px;
+}
+
+/* Video container */
+.video-wrapper {
+  width: 260px;
+  height: 260px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(255, 80, 180, 0.7);
+}
+
+/* Video */
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+
+
+      @keyframes waveSlow {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(-10%); }
+        100% { transform: translateX(0); }
+      }
+      .animate-waveSlow {
+        animation: waveSlow 18s ease-in-out infinite;
+      }
+
+      @keyframes spin-slow {
+  from { transform: translateY(50%) rotate(0deg); }
+  to   { transform: translateY(50%) rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 60s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+  </style>
+
+
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -17,8 +82,9 @@
   <header
       class="sticky top-0 z-50 shadow-md h-22"
       style="background-color: #f8e8ee;"
+      
     >
-    <div class="container mx-auto px-6 py-1">
+    <div class="container mx-auto px-6 py-1" style="font-family: Times, Times New Roman, serif;">
       <div class="flex items-center">
         <!-- <div class="text-2xl font-bold text-gray-800 flex-shrink-0">Lush Jewels</div> -->
           <div class="flex items-center h-full flex-shrink-0">
@@ -49,27 +115,46 @@
 
         <!-- Right: Navigation Menu -->
         <!-- Right: Navigation Menu -->
-        <nav class="hidden lg:flex space-x-6 flex-shrink-0">
-          <a href="#home" class="text-gray-600 hover:text-gray-900">Home</a>
+        <nav class="hidden text-lg lg:flex space-x-6 flex-shrink-0">
+  <a href="#home" class="text-gray-600 hover:text-gray-900 border-b-2 border-transparent hover:border-pink-600 pb-0.5">
+    Home <span class="text-xs ml-1">></span>
+  </a>
 
-          <% if (session && session.user) { %>
-            <a href="/user/account" class="text-gray-600 hover:text-gray-900 ml-4">My Account</a>
-          <% } else { %>
-            <a href="/user/login" class="text-gray-600 hover:text-gray-900 ml-4">Login</a>
-          <% } %>
+  <% if (session && session.user) { %>
+    <a href="/user/account" class="text-gray-600 hover:text-gray-900 ml-4 border-b-2 border-transparent hover:border-pink-600 pb-0.5">
+      My Account <span class="text-xs ml-1">></span>
+    </a>
+  <% } else { %>
+    <a href="/user/login" class="text-gray-600 hover:text-gray-900 ml-4 border-b-2 border-transparent hover:border-pink-600 pb-0.5">
+      Login <span class="text-xs ml-1">></span>
+    </a>
+  <% } %>
 
-          <a href="#products" class="text-gray-600 hover:text-gray-900 ml-4">Products</a>
-          <a href="#contact" class="text-gray-600 hover:text-gray-900 ml-4">Contact</a>
+  <a href="#products" class="text-gray-600 hover:text-gray-900 ml-4 border-b-2 border-transparent hover:border-pink-600 pb-0.5">
+    Products <span class="text-xs ml-1">></span>
+  </a>
+  <a href="#contact" class="text-gray-600 hover:text-gray-900 ml-4 border-b-2 border-transparent hover:border-pink-600 pb-0.5">
+    Contact <span class="text-xs ml-1">></span>
+  </a>
 
+  <!-- Cart Button -->
+  <button
+    id="cart-btn"
+    class="relative flex items-center gap-1 text-gray-600 hover:text-gray-900 font-semibold">
+    🛒 <span>Cart <span class="text-xs ml-1">></span></span>
 
+    <span
+      id="cart-count"
+      class="absolute -top-2 -right-3
+            flex items-center justify-center
+            h-5 min-w-[20px] px-1
+            rounded-full
+            bg-pink-600 text-white text-xs font-bold">
+      0
+    </span>
+  </button>
+</nav>
 
-          <!-- Cart Button -->
-          <button id="cart-btn" class="relative bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">
-            🛒 Cart
-            <span id="cart-count"
-              class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span>
-          </button>
-        </nav>
 
         <!-- Mobile Menu Button -->
         <div class="lg:hidden ml-auto">
@@ -83,34 +168,62 @@
       </div>
 
       <!-- Mobile Menu -->
-      <nav id="mobile-menu" class="lg:hidden hidden px-6 pb-4 space-y-2 bg-#f8e8ee shadow-md">
-        <!-- Mobile Search Box -->
-        <div class="flex py-2">
-          <input type="text" id="mobile-search-input" placeholder="Search jewelry..."
-            aria-label="Search jewelry" />
-          <button id="mobile-search-btn"
-            class="bg-gray-800 text-white px-4 py-2 rounded-r-full hover:bg-gray-700 transition" aria-label="Search">
-            Search
-          </button>
-        </div>
-        <a href="#home" class="block text-gray-600 py-2">Home</a>
+      <nav id="mobile-menu" class="lg:hidden hidden px-6 pb-4 space-y-2 bg-[#f8e8ee] shadow-md">
+  <!-- Mobile Search Box -->
+  <div class="flex py-2">
+    <input type="text" id="mobile-search-input" placeholder="Search jewelry..."
+      aria-label="Search jewelry" class="flex-1 px-3 py-2 border rounded-l-md" />
+    <button id="mobile-search-btn"
+      class="bg-gray-800 text-white px-4 py-2 rounded-r-full hover:bg-gray-700 transition" aria-label="Search">
+      Search
+    </button>
+  </div>
 
-        <% if (session && session.user) { %>
-          <a href="/user/account" class="block text-gray-600 hover:text-gray-900 py-2">My Account</a>
-        <% } else { %>
-          <a href="/user/login" class="block text-gray-600 hover:text-gray-900 py-2">Login</a>
-        <% } %>
+  <a href="#home" class="block text-gray-600 py-2 border-b-2 border-transparent hover:border-pink-600">
+    Home <span class="text-xs ml-1">></span>
+  </a>
 
-        <a href="#products" class="block text-gray-600 py-2">Products</a>
-        <a href="#contact" class="block text-gray-600 py-2">Contact</a>
-            <!-- Cart Button for Mobile -->
-            <button id="mobile-cart-btn"
-            class="relative bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 w-full text-left">
-              🛒 Cart
-              <span id="mobile-cart-count"
-                class="absolute top-1/2 -translate-y-1/2 right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span>
-            </button>
-      </nav>
+  <% if (session && session.user) { %>
+    <a href="/user/account" class="block text-gray-600 py-2 border-b-2 border-transparent hover:border-pink-600">
+      My Account <span class="text-xs ml-1">></span>
+    </a>
+  <% } else { %>
+    <a href="/user/login" class="block text-gray-600 py-2 border-b-2 border-transparent hover:border-pink-600">
+      Login <span class="text-xs ml-1">></span>
+    </a>
+  <% } %>
+
+  <a href="#products" class="block text-gray-600 py-2 border-b-2 border-transparent hover:border-pink-600">
+    Products <span class="text-xs ml-1">></span>
+  </a>
+
+  <a href="#contact" class="block text-gray-600 py-2 border-b-2 border-transparent hover:border-pink-600">
+    Contact <span class="text-xs ml-1">></span>
+  </a>
+
+  <!-- Cart Button for Mobile -->
+  <button
+    id="mobile-cart-btn"
+    class="relative flex items-center gap-2 font-didot text-gray-700 hover:text-gray-900 py-1 border-b-2 border-transparent hover:border-pink-600"
+    aria-label="Cart"
+  >
+    🛒 <span>Cart <span class="text-xs ml-1">></span></span>
+
+    <!-- Cart Count -->
+    <span
+      id="mobile-cart-count"
+      class="absolute -top-2 -right-3
+             min-w-[20px] h-[20px]
+             flex items-center justify-center
+             bg-pink-600 text-white
+             text-[11px] font-semibold
+             rounded-full
+             leading-none">
+      0
+    </span>
+  </button>
+</nav>
+
     </div>
   </header>
 
@@ -122,6 +235,7 @@
   class="relative w-full bg-no-repeat bg-center bg-cover
          h-[320px] sm:h-[420px] md:h-[520px] lg:h-[95vh]"
   style="background-image: url('/images/lush-jewels-hero.jpg');"
+  
 >
   <!-- Overlay Content -->
   <div class="absolute inset-0 flex flex-col items-center justify-end pb-8 sm:pb-12 text-center px-4">
@@ -130,6 +244,8 @@
       class="text-lg sm:text-2xl md:text-3xl lg:text-4xl
              font-serif font-semibold text-white
              mb-3 drop-shadow-lg"
+
+             style="font-family: Times, Times New Roman, serif;"
     >
       Discover Timeless Elegance & Artistry
     </h1>
@@ -142,6 +258,8 @@
              sm:px-7 sm:py-3 sm:text-base
              rounded-full font-semibold
              hover:bg-white transition shadow-lg"
+
+             style="font-family: Times, Times New Roman, serif;"
     >
       Shop Now
     </a>
@@ -158,111 +276,163 @@
 
 
   <!-- About Section -->
-<section
-  id="about"
-  class="py-16 px-6
-         bg-[linear-gradient(135deg,#ffffff_0%,#f8e8ee_55%,#f2c2cf_100%)]
-         border-t border-[#e6cfd6]
-         border-b border-[#e6cfd6]
-         shadow-[inset_0_1px_0_rgba(244,190,190,0.6),inset_0_-1px_0_rgba(244,190,190,0.6)]"
->
+    <section
+        id="about"
+        class="relative overflow-hidden
+              bg-[#f8e8ee]
+              py-20 px-6
+              font-[Times,Times_New_Roman,serif]"
 
-  <div class="container mx-auto text-center">
-    
-    <h2 class="text-4xl font-bold mb-4">Our Story</h2>
+              style="font-family: Times, Times New Roman, serif;"
+      >
+      <!-- Subtle animated wave -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div
+          class="absolute -bottom-24 left-0 w-[200%] h-48
+                bg-pink-200/40
+                rounded-[100%]
+                animate-waveSlow">
+        </div>
+      </div>
 
-    <p class="text-lg mb-8 max-w-2xl mx-auto">
-      At Lush Jewellery, we believe luxury should be a part of every day & not just special occasions.
-      Our mission is simple, to bring you jewellery that is beautiful, durable, and affordable without
-      ever compromising on quality. Each piece is crafted with care, designed to be anti-tarnish and
-      long-lasting, so you can shine with confidence wherever life takes you.
-      We believe in keeping our customers at the heart of everything we do.
-    </p>
+      <div class="relative container mx-auto max-w-6xl grid md:grid-cols-2 gap-12 items-center">
 
-  </div>
-</section>
+        <!-- LEFT -->
+        <div class="text-center md:text-left">
+          <h2
+            class="text-5xl md:text-6xl font-bold text-gray-800
+                  mb-6 tracking-wide">
+            Our Story
+          </h2>
+
+          <!-- Decorative divider -->
+          <div
+            class="w-24 h-[3px]
+                  bg-pink-400
+                  rounded-full
+                  mx-auto md:mx-0">
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div>
+          <p
+            class="text-lg md:text-xl
+                  leading-relaxed
+                  text-gray-700">
+            At Lush Jewellery, we believe luxury should be part of everyday life,
+            not just special occasions. Our mission is to create jewellery that is
+            elegant, durable, and affordable without compromising on quality.
+            Each piece is thoughtfully designed to be anti-tarnish and long-lasting,
+            so you can shine with confidence wherever life takes you.
+            <br /><br />
+            We place our customers at the heart of everything we do, crafting pieces
+            that feel personal, timeless, and effortlessly beautiful.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
 
 
 
   <!-- Products Section -->
-  <!-- <section id="products" class="py-16 px-6 bg-gray-100"> -->
-    <section class="py-16 px-6 bg-gray-100" style="background: linear-gradient(135deg, #f8e8ee, #fdecef);">
+  <section class="py-16 px-6 bg-gray-100" style="background: linear-gradient(135deg, #f8e8ee, #fdecef);">
 
     <div class="container mx-auto" >
       <h2 class="text-4xl font-bold text-center mb-8">Featured Collections</h2>
 
-      <!-- Categories -->
-      <!-- <div class="flex flex-wrap justify-center space-x-4 mb-8">
-        <button class="category-btn bg-gray-800 text-white px-4 py-2 rounded-full">All</button>
-        <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border"><a
-            href="necklaces.html">Necklaces</a></button>
-        <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border"><a
-            href="rings.html">Rings</a></button>
-        <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border"><a
-            href="earrings.html">Earrings</a></button>
-        <button class="category-btn bg-white text-gray-800 px-4 py-2 rounded-full border"><a
-            href="bracelets.html">Bracelets</a></button>
-      </div> -->
 
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mb-10">
 
+  <!-- Category Card -->
+  <a href="/"
+     class="group relative
+            w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36
+            rounded-full overflow-hidden
+            bg-gradient-to-br from-pink-100 to-pink-200
+            shadow-lg shadow-pink-500/40
+            hover:scale-110 transition-all duration-300">
 
+    <img src="/images/all.png"
+         class="w-full h-full object-contain p-3 sm:p-5 md:p-6" />
 
-      <div class="flex flex-wrap justify-center gap-4 mb-8">
-
-  <!-- Active / All -->
-  <a href="/category/all"
-     class="px-6 py-2 rounded-full text-sm font-semibold tracking-wide
-            bg-gradient-to-r from-pink-500 to-pink-700
-            text-white shadow-lg shadow-pink-500/40
-            hover:scale-105 transition-all duration-300">
-    All
+    <div
+      class="absolute bottom-0 w-full text-center
+             py-1 sm:py-2
+             bg-black/40 text-white
+             text-[10px] sm:text-xs md:text-sm
+             font-semibold tracking-wide">
+      All
+    </div>
   </a>
 
   <a href="/category/necklaces"
-     class="px-6 py-2 rounded-full text-sm font-semibold tracking-wide
-            bg-gradient-to-r from-white to-pink-200
-            text-pink-900 border border-pink-300
-            shadow-md shadow-pink-300/30
-            hover:from-pink-400 hover:to-pink-600 hover:text-white
-            hover:shadow-lg hover:shadow-pink-500/40
-            hover:scale-105 transition-all duration-300">
-    Necklaces
+     class="group relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36
+            rounded-full overflow-hidden
+            bg-gradient-to-br from-pink-100 to-pink-200
+            shadow-lg shadow-pink-400/40
+            hover:scale-110 transition-all duration-300">
+
+    <img src="/images/necklaces.png"
+         class="w-full h-full object-contain p-3 sm:p-5 md:p-6" />
+
+    <div class="absolute bottom-0 w-full text-center py-1 sm:py-2 bg-black/40 text-white text-[10px] sm:text-xs md:text-sm font-semibold">
+      Necklaces
+    </div>
   </a>
 
   <a href="/category/rings"
-     class="px-6 py-2 rounded-full text-sm font-semibold tracking-wide
-            bg-gradient-to-r from-white to-pink-200
-            text-pink-900 border border-pink-300
-            shadow-md shadow-pink-300/30
-            hover:from-pink-400 hover:to-pink-600 hover:text-white
-            hover:shadow-lg hover:shadow-pink-500/40
-            hover:scale-105 transition-all duration-300">
-    Rings
+     class="group relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36
+            rounded-full overflow-hidden
+            bg-gradient-to-br from-pink-100 to-pink-200
+            shadow-lg shadow-pink-400/40
+            hover:scale-110 transition-all duration-300">
+
+    <img src="/images/ring.png"
+         class="w-full h-full object-contain p-3 sm:p-5 md:p-6" />
+
+    <div class="absolute bottom-0 w-full text-center py-1 sm:py-2 bg-black/40 text-white text-[10px] sm:text-xs md:text-sm font-semibold">
+      Rings
+    </div>
   </a>
 
   <a href="/category/earrings"
-     class="px-6 py-2 rounded-full text-sm font-semibold tracking-wide
-            bg-gradient-to-r from-white to-pink-200
-            text-pink-900 border border-pink-300
-            shadow-md shadow-pink-300/30
-            hover:from-pink-400 hover:to-pink-600 hover:text-white
-            hover:shadow-lg hover:shadow-pink-500/40
-            hover:scale-105 transition-all duration-300">
-    Earrings
+     class="group relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36
+            rounded-full overflow-hidden
+            bg-gradient-to-br from-pink-100 to-pink-200
+            shadow-lg shadow-pink-400/40
+            hover:scale-110 transition-all duration-300">
+
+    <img src="/images/earring.png"
+         class="w-full h-full object-contain p-3 sm:p-5 md:p-6" />
+
+    <div class="absolute bottom-0 w-full text-center py-1 sm:py-2 bg-black/40 text-white text-[10px] sm:text-xs md:text-sm font-semibold">
+      Earrings
+    </div>
   </a>
 
   <a href="/category/bracelets"
-     class="px-6 py-2 rounded-full text-sm font-semibold tracking-wide
-            bg-gradient-to-r from-white to-pink-200
-            text-pink-900 border border-pink-300
-            shadow-md shadow-pink-300/30
-            hover:from-pink-400 hover:to-pink-600 hover:text-white
-            hover:shadow-lg hover:shadow-pink-500/40
-            hover:scale-105 transition-all duration-300">
-    Bracelets
+     class="group relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36
+            rounded-full overflow-hidden
+            bg-gradient-to-br from-pink-100 to-pink-200
+            shadow-lg shadow-pink-400/40
+            hover:scale-110 transition-all duration-300">
+
+    <img src="/images/bracelets.png"
+         class="w-full h-full object-contain p-3 sm:p-5 md:p-6" />
+
+    <div class="absolute bottom-0 w-full text-center py-1 sm:py-2 bg-black/40 text-white text-[10px] sm:text-xs md:text-sm font-semibold">
+      Bracelets
+    </div>
   </a>
 
 </div>
+
+
+
+
 
 
 
@@ -281,8 +451,8 @@
 <!-- ============================================================================================================================================ -->
 <section id="products" class="py-16 bg-gray-100" style="background: linear-gradient(135deg, #f8e8ee, #fdecef);">
   <div class="w-full max-w-[1500px] mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-8">Our Collections</h2>
-    <p class="text-lg text-center mb-12 max-w-3xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-8" style="font-family: Times, Times New Roman, serif;">Our Collections</h2>
+    <p class="text-lg text-center mb-12 max-w-3xl mx-auto" style="font-family: Times, Times New Roman, serif;">
       Discover our exquisite jewelry pieces — from classic rings to elegant necklaces and timeless bracelets.
     </p>
 
@@ -461,10 +631,89 @@
 
 
 
+  <!-- =============================================rounded tree================================================================= -->
+
+
+
+
+
+
+  <!-- =============================================rounded tree================================================================= -->
+<section
+  class="relative overflow-hidden
+         bg-[linear-gradient(180deg,#f8e8ee_0%,#f2c2cf_60%,#e8a8b8_100%)]
+         py-32 md:py-44 text-center" style="font-family: Times, Times New Roman, serif;">
+
+  <!-- Heading -->
+    <h2 class="text-4xl md:text-5xl font-semibold mb-6">
+      Pan India Delivery
+    </h2>
+
+    <p class="max-w-3xl mx-auto text-lg md:text-xl text-black/90 mb-16">
+      Our jewellery reaches every corner of India with trusted logistics,
+      secure packaging, and timely delivery.
+    </p>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-28">
+      <div>
+        <h3 class="text-4xl font-bold">28+</h3>
+        <p class="text-lg mt-2">States</p>
+      </div>
+      <div>
+        <h3 class="text-4xl font-bold">500+</h3>
+        <p class="text-lg mt-2">Cities</p>
+      </div>
+      <div>
+        <h3 class="text-4xl font-bold">100%</h3>
+        <p class="text-lg mt-2">Trustable</p>
+      </div>
+      <div>
+        <h3 class="text-4xl font-bold">100%</h3>
+        <p class="text-lg mt-2">Secure Shipping</p>
+      </div>
+    </div>
+
+  <!-- 🌍 HALF EARTH VIDEO -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex justify-center pointer-events-none">
+
+    <div
+      class="relative
+             w-[22rem] h-[22rem]
+             md:w-[32rem] md:h-[32rem]
+             rounded-full
+             overflow-hidden
+             translate-y-1/2
+             shadow-[0_-40px_80px_rgba(180,80,110,0.55)]">
+
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="w-full h-full object-cover rounded-full">
+        <source src="/images/rounded_earth.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- soft pink glow -->
+      <div class="absolute inset-0 rounded-full ring-2 ring-pink-300/40"></div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+  <!-- =============================================rounded tree================================================================= -->
+
+
+
 
 
   <!-- Footer -->
-  <footer id="contact" class="bg-gray-900 text-gray-300 pt-12 pb-6">
+  <footer id="contact" class="bg-gray-900 text-gray-300 pt-12 pb-6" style="font-family: Times, Times New Roman, serif;">
   <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
     <!-- 🛍️ Brand + About -->
@@ -480,6 +729,13 @@
           class="h-20 sm:h-28 md:h-32 ml-11  object-contain"
         />
       </a>
+      
+      <div class="flex space-x-4 mt-4 ml-8">
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-yellow-400"><i class="fab fa-youtube"></i></a>
+      </div>
 
     </div>
 
