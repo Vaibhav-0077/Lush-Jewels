@@ -63,61 +63,152 @@
 
   <!-- 🔹 Header -->
   <!-- 🔹 Header -->
-  <header class="bg-white shadow sticky top-0 z-50" style="background-color: #f8e8ee;">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="text-2xl font-bold text-gray-800">Lush Jewels</div>
+  <header
+      class="sticky top-0 z-50 shadow-md h-22"
+      style="background-color: #f8e8ee;"
+      
+    >
+    <div class="container mx-auto px-6 py-1" style="font-family: Times, Times New Roman, serif;">
+      <div class="flex items-center">
+        <!-- <div class="text-2xl font-bold text-gray-800 flex-shrink-0">Lush Jewels</div> -->
+          <div class="flex items-center h-full flex-shrink-0">
+            <a href="/" class="h-full flex items-center">
+              <img
+                src="/images/lush_jewels_header_logo.png"
+                alt="Lush Jewellery Logo"
+                class="h-20 w-auto object-contain"
+              />
+            </a>
+          </div>
 
-      <!-- 🖥️ Desktop Navigation -->
-      <nav class="hidden md:flex space-x-6 items-center">
-        <a href="/" class="text-gray-600 hover:text-gray-900">Home</a>
-        <a href="/category/necklaces" class="text-gray-600 hover:text-gray-900">Necklaces</a>
-        <a href="/category/rings" class="text-gray-600 hover:text-gray-900">Rings</a>
-        <a href="/category/earrings" class="text-gray-600 hover:text-gray-900">Earrings</a>
-        <a href="/category/bracelets" class="text-gray-600 hover:text-gray-900">Bracelets</a>
 
-        <!-- 🛒 Desktop Cart Button -->
-        <button id="cart-btn" class="relative bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">
-          🛒 Cart
-          <span id="cart-count"
-            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span>
+
+
+
+        <!-- Center: Search Box (hidden on small screens) -->
+        <div class="flex-grow flex justify-center hidden lg:flex mx-6">
+          <input type="text" id="header-search-input" placeholder="Search jewelry..."
+            class="w-full max-w-md px-3 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-gray-800"
+            aria-label="Search jewelry" />
+          <button id="header-search-btn"
+            class="bg-gray-800 text-white px-4 py-2 rounded-r-full hover:bg-gray-700 transition whitespace-nowrap"
+            aria-label="Search">
+            Search
+          </button>
+        </div>
+
+        <!-- Right: Navigation Menu -->
+        <!-- Right: Navigation Menu -->
+        <nav class="hidden text-lg lg:flex space-x-6 flex-shrink-0">
+          <a href="#home" class="text-gray-600 hover:text-gray-900 border-b-2 border-transparent hover:border-pink-600 pb-0.5">
+            Home <span class="text-xs ml-1">></span>
+          </a>
+
+          <% if (session && session.user) { %>
+            <a href="/user/account" class="text-gray-600 hover:text-gray-900 ml-4 border-b-2 border-transparent hover:border-pink-600 pb-0.5">
+              My Account <span class="text-xs ml-1">></span>
+            </a>
+          <% } else { %>
+            <a href="/user/login" class="text-gray-600 hover:text-gray-900 ml-4 border-b-2 border-transparent hover:border-pink-600 pb-0.5">
+              Login <span class="text-xs ml-1">></span>
+            </a>
+          <% } %>
+
+          <a href="#products" class="text-gray-600 hover:text-gray-900 ml-4 border-b-2 border-transparent hover:border-pink-600 pb-0.5">
+            Products <span class="text-xs ml-1">></span>
+          </a>
+          <a href="#contact" class="text-gray-600 hover:text-gray-900 ml-4 border-b-2 border-transparent hover:border-pink-600 pb-0.5">
+            Contact <span class="text-xs ml-1">></span>
+          </a>
+
+          <!-- Cart Button -->
+          <button
+            id="cart-btn"
+            class="relative flex items-center gap-1 text-gray-600 hover:text-gray-900 font-semibold">
+            🛒 <span>Cart <span class="text-xs ml-1">></span></span>
+
+            <span
+              id="cart-count"
+              class="absolute -top-2 -right-3
+                    flex items-center justify-center
+                    h-5 min-w-[20px] px-1
+                    rounded-full
+                    bg-pink-600 text-white text-xs font-bold">
+              0
+            </span>
+          </button>
+        </nav>
+
+
+        <!-- Mobile Menu Button -->
+        <div class="lg:hidden ml-auto">
+          <button id="menu-btn" class="text-gray-600 focus:outline-none" aria-label="Toggle menu">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <nav id="mobile-menu" class="lg:hidden hidden px-6 pb-4 space-y-2 bg-[#f8e8ee] shadow-md">
+        <!-- Mobile Search Box -->
+        <div class="flex py-2">
+          <input type="text" id="mobile-search-input" placeholder="Search jewelry..."
+            aria-label="Search jewelry" class="flex-1 px-3 py-2 border rounded-l-md" />
+          <button id="mobile-search-btn"
+            class="bg-gray-800 text-white px-4 py-2 rounded-r-full hover:bg-gray-700 transition" aria-label="Search">
+            Search
+          </button>
+        </div>
+
+        <a href="#home" class="block text-gray-600 py-2 border-b-2 border-transparent hover:border-pink-600">
+          Home <span class="text-xs ml-1">></span>
+        </a>
+
+        <% if (session && session.user) { %>
+          <a href="/user/account" class="block text-gray-600 py-2 border-b-2 border-transparent hover:border-pink-600">
+            My Account <span class="text-xs ml-1">></span>
+          </a>
+        <% } else { %>
+          <a href="/user/login" class="block text-gray-600 py-2 border-b-2 border-transparent hover:border-pink-600">
+            Login <span class="text-xs ml-1">></span>
+          </a>
+        <% } %>
+
+        <a href="#products" class="block text-gray-600 py-2 border-b-2 border-transparent hover:border-pink-600">
+          Products <span class="text-xs ml-1">></span>
+        </a>
+
+        <a href="#contact" class="block text-gray-600 py-2 border-b-2 border-transparent hover:border-pink-600">
+          Contact <span class="text-xs ml-1">></span>
+        </a>
+
+        <!-- Cart Button for Mobile -->
+        <button
+          id="mobile-cart-btn"
+          class="relative flex items-center gap-2 font-didot text-gray-700 hover:text-gray-900 py-1 border-b-2 border-transparent hover:border-pink-600"
+          aria-label="Cart"
+        >
+          🛒 <span>Cart <span class="text-xs ml-1">></span></span>
+
+          <!-- Cart Count -->
+          <span
+            id="mobile-cart-count"
+            class="absolute -top-2 -right-3
+                  min-w-[20px] h-[20px]
+                  flex items-center justify-center
+                  bg-pink-600 text-white
+                  text-[11px] font-semibold
+                  rounded-full
+                  leading-none">
+            0
+          </span>
         </button>
       </nav>
 
-      <!-- 📱 Mobile Hamburger (visible only on mobile) -->
-      <div class="md:hidden">
-        <button id="menu-btn" class="text-gray-700 focus:outline-none" aria-label="Toggle menu">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-          </svg>
-        </button>
-      </div>
     </div>
-
-    <!-- 📱 Mobile Dropdown Menu -->
-    <nav id="mobile-menu" class="md:hidden hidden px-6 pb-4 space-y-2 bg-white shadow-md">
-      <!-- Mobile Search -->
-      <!-- <div class="flex py-2">
-      <input type="text" id="mobile-search-input" placeholder="Search jewelry..."
-        class="flex-grow px-3 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-gray-800" />
-      <button id="mobile-search-btn"
-        class="bg-gray-800 text-white px-4 py-2 rounded-r-full hover:bg-gray-700 transition">
-        Search
-      </button>
-    </div> -->
-
-      <a href="/" class="block text-gray-600">Home</a>
-      <a href="/login" class="block text-gray-600">Login</a>
-      <a href="/category" class="block text-gray-600">Products</a>
-      <a href="/contact" class="block text-gray-600">Contact</a>
-
-      <!-- 🛒 Mobile Cart Button (inside dropdown) -->
-      <button id="mobile-cart-btn"
-        class="relative bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 w-full text-left">
-        🛒 Cart
-        <span id="mobile-cart-count"
-          class="absolute top-1/2 -translate-y-1/2 right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span>
-      </button>
-    </nav>
   </header>
 
 
@@ -163,7 +254,7 @@
 
     <!-- Right: Info -->
     <div class="bg-white rounded-lg shadow-md p-6 space-y-4" style="background-color:  #f9f6f7;">
-      <h1 class="text-2xl md:text-3xl font-bold text-gray-900">
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900" >
         <%= name %>
       </h1>
       <p class="text-sm text-gray-500">Code: PR99193</p>
@@ -187,7 +278,7 @@
         </div>
       </div>
 
-      <div class="flex gap-4 pt-4">
+      <div class="flex gap-4 pt-4" style="font-family: Times, Times New Roman, serif;">
         <button id="add-to-cart"
           class="relative w-full
                 px-4 py-3 text-sm           /* 📱 Mobile size */
@@ -278,9 +369,9 @@
 
 
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6" style="font-family: Times, Times New Roman, serif;">
         <div class="border rounded-lg p-3 text-center text-sm">
-          🚚 <p>Free Shipping<br><span class="text-gray-500">Above ₹499</span></p>
+          🔐 <p>Secure Payment<br></p>
         </div>
         <div class="border rounded-lg p-3 text-center text-sm">
           🔁 <p>Easy Return</p>
@@ -293,7 +384,7 @@
         </div>
       </div>
 
-      <p class="text-gray-600 text-sm pt-6">
+      <p class="text-gray-600 pt-6" style="font-family: Times, Times New Roman, serif;">
         This elegant jewellery piece complements any outfit with its unique craftsmanship and brilliance.
       </p>
     </div>
@@ -307,19 +398,19 @@
   </div> -->
 
   <!-- 🩵 About This Product -->
-    <section class="mt-10 bg-white shadow-md rounded-lg p-6" style="background-color: #f9f6f7;">
+    <section class="mt-10 bg-white shadow-md rounded-lg p-6" style="background-color: #f9f6f7; font-family: Times, Times New Roman, serif;">
       <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">About this Product</h2>
-      <p class="text-gray-700 leading-relaxed">
+      <p class="text-gray-700 leading-relaxed" >
         <%= description || "This elegant piece is crafted with precision and designed to bring out your natural beauty on every occasion." %>
       </p>
     </section>
 
     <!-- 🩶 Product Details Table -->
-    <section class="mt-8 bg-white shadow-md rounded-lg p-6 " style="background-color: #fbfafa;">
+    <section class="mt-8 bg-white shadow-md rounded-lg p-6 " style="background-color: #fbfafa; font-family: Times, Times New Roman, serif;">
       <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Details</h2>
       <div class="overflow-x-auto">
         <table class="min-w-full text-sm text-left text-gray-700 border border-gray-200">
-          <tbody>
+          <tbody style="font-size: 1rem;">
             <tr class="border-b"><td class="font-medium p-2 w-1/3">Product Name</td><td class="p-2"><%= name %></td></tr>
             <tr class="border-b"><td class="font-medium p-2">Design</td><td class="p-2"><%= design || 'Classic Design' %></td></tr>
             <tr class="border-b"><td class="font-medium p-2">Occasion</td><td class="p-2"><%= occasion || 'Wedding, Party, Festive' %></td></tr>
@@ -333,7 +424,7 @@
 
 
     <!-- Footer -->
-  <footer id="contact" class="bg-gray-900 text-gray-300 pt-12 pb-6">
+  <footer id="contact" class="bg-gray-900 text-gray-300 pt-12 pb-6" style="font-family: Times, Times New Roman, serif;">
   <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
      <!-- 🛍️ Brand + About -->
