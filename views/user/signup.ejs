@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -31,5 +31,121 @@
     Already have an account? <a href="/user/login" class="text-purple-700 font-semibold hover:underline">Login</a>
   </p>
 </div>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account | Lush Jewels</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-gradient-to-br from-pink-50 via-white to-pink-100">
+
+  <!-- Include Header -->
+  <%- include('../partials/header', { session: session }) %>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="flex-grow flex items-center justify-center px-4 py-12">
+
+    <div class="bg-white/90 backdrop-blur-md p-8 sm:p-10 rounded-2xl shadow-2xl w-full max-w-md border border-pink-100">
+
+      <h2 class="text-3xl font-serif font-bold mb-2 text-center text-pink-700">
+        Create Account
+      </h2>
+      <p class="text-center text-gray-500 mb-6 text-sm">
+        Join Lush Jewels and explore timeless beauty
+      </p>
+
+      <!-- Error Message -->
+      <% if (typeof error !== "undefined" && error) { %>
+        <p class="bg-red-50 text-red-700 border border-red-200 p-3 rounded-lg mb-4 text-center text-sm">
+          <%= error %>
+        </p>
+      <% } %>
+
+      <!-- Info Message -->
+      <% if (typeof message !== "undefined" && message) { %>
+        <div class="bg-yellow-50 border border-yellow-300 text-yellow-700 p-3 rounded-lg mb-4 text-center text-sm">
+          <%= message %>
+        </div>
+      <% } %>
+
+      <!-- Signup Form -->
+      <form action="/user/signup" method="POST" class="space-y-5">
+
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">
+            Full Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            required
+            placeholder="Your full name"
+            class="w-full px-4 py-3 rounded-lg border border-gray-300
+                   focus:border-pink-500 focus:ring-2 focus:ring-pink-300
+                   outline-none transition"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">
+            Email Address
+          </label>
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="you@example.com"
+            class="w-full px-4 py-3 rounded-lg border border-gray-300
+                   focus:border-pink-500 focus:ring-2 focus:ring-pink-300
+                   outline-none transition"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            required
+            placeholder="Create a strong password"
+            class="w-full px-4 py-3 rounded-lg border border-gray-300
+                   focus:border-pink-500 focus:ring-2 focus:ring-pink-300
+                   outline-none transition"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 rounded-lg font-semibold tracking-wide transition shadow-md hover:shadow-lg"
+        >
+          Create Account
+        </button>
+
+      </form>
+
+      <p class="mt-6 text-center text-gray-600 text-sm">
+        Already have an account?
+        <a href="/user/login" class="text-pink-700 font-semibold hover:underline">
+          Login
+        </a>
+      </p>
+
+    </div>
+
+  </main>
+
+  <!-- Include Footer -->
+  <%- include('../partials/footer') %>
+
 </body>
 </html>

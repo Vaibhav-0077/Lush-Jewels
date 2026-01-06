@@ -1,55 +1,37 @@
-  <header class="bg-white shadow-md sticky top-0 z-50">
+  <header class=" shadow-md sticky top-0 z-50" style="background-color: #f8e8ee; font-family: Times, Times New Roman, serif; font-size: 1.1rem;">
     <div class="container mx-auto px-6 py-4">
       <div class="flex items-center">
         <!-- Left: Site Title -->
-        <div class="text-2xl font-bold text-gray-800 flex-shrink-0">Lush Jewels</div>
+        <div class="flex items-center h-full flex-shrink-0">
+            <a href="/" class="h-full flex items-center">
+              <img
+                src="/images/lush_jewels_header_logo.png"
+                alt="Lush Jewellery Logo"
+                class="h-20 w-auto object-contain"
+              />
+            </a>
+          </div>
 
         <!-- Center: Search Box (hidden on small screens) -->
         <div class="flex-grow flex justify-center hidden lg:flex mx-6">
-          <!-- <input type="text" id="header-search-input" placeholder="Search jewelry..."
-            class="w-full max-w-md px-3 py-2 border border-gray-300 rounded-l-full focus:outline-none focus:ring-2 focus:ring-gray-800"
-            aria-label="Search jewelry" /> -->
-          <!-- <button id="header-search-btn"
-            class="bg-gray-800 text-white px-4 py-2 rounded-r-full hover:bg-gray-700 transition whitespace-nowrap"
-            aria-label="Search"> -->
             
           <!-- </button> -->
         </div>
 
         <!-- Right: Navigation Menu -->
-        <!-- Right: Navigation Menu -->
         <nav class="hidden lg:flex space-x-6 flex-shrink-0 mr-16">
-          <a href="/" class="text-gray-600 hover:text-gray-900">Home</a>
+          <a href="/" class="text-gray-600 hover:text-gray-900">Home<span class="text-xs ml-1">></span></a>
 
 
           <% if (session && session.user) { %>
-            <a href="/user/account" class="text-gray-600 hover:text-gray-900 ml-4">My Account</a>
+            <a href="/user/account" class="text-gray-600 hover:text-gray-900 ml-4">My Account<span class="text-xs ml-1">></span></a>
           <% } else { %>
-            <a href="/user/login" class="text-gray-600 hover:text-gray-900 ml-4">Login</a>
+            <a href="/user/login" class="text-gray-600 hover:text-gray-900 ml-4">Login<span class="text-xs ml-1">></span></a>
           <% } %>
 
           <!-- <a href="" class="text-gray-600 hover:text-gray-900 ml-4">Products</a> -->
-          <a href="#contact" class="text-gray-600 hover:text-gray-900 ml-4">Contact</a>
-
-
-
-          <!-- Cart Button -->
-          <!-- <button id="cart-btn" class="relative bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700">
-            🛒 Cart
-            <span id="cart-count"
-              class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">0</span>
-          </button> -->
+          <a href="#contact" class="text-gray-600 hover:text-gray-900 ml-4">Contact<span class="text-xs ml-1">></span></a>
         </nav>
-
-        <!-- Mobile Menu Button -->
-        <!-- <div class="lg:hidden ml-auto">
-          <button id="menu-btn" class="text-gray-600 focus:outline-none" aria-label="Toggle menu">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-              class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-          </button>
-        </div> -->
       </div>
 
       <!-- Mobile Menu -->
